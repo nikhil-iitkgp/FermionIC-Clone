@@ -13,7 +13,7 @@ export default defineConfig(({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
-    base: "/",  // ✅ Ensures correct base path for deployment
+    base: "/", 
     build: {
       outDir: "dist",
     },
