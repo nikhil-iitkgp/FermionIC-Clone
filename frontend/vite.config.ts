@@ -4,7 +4,6 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { fileURLToPath, URL } from 'url';
 
 export default defineConfig(({ mode }) => {
-  // Load environment variables from `.env` files
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
@@ -26,7 +25,9 @@ export default defineConfig(({ mode }) => {
           secure: false,
         },
       },
-      historyApiFallback: true, 
     },
+    preview: {
+      port: 4173,
+    }
   };
 });
