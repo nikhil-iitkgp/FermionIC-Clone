@@ -13,7 +13,12 @@ const app = express();
 app.use(express.json()); // Parse JSON body
 
 // CORS Setup
-const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"];
+const allowedOrigins = [
+  process.env.CLIENT_URL, // This should be set in Render's environment variables
+  "http://localhost:5173", // For local development
+  "https://fermion-ic-clone.vercel.app" // Your deployed frontend URL
+];
+
 app.use(
   cors({
     origin: allowedOrigins,
