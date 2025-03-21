@@ -15,17 +15,18 @@ export default defineConfig(({ mode }) => {
       },
     },
     build: {
-      outDir: "dist", // Ensures correct build folder
+      outDir: "dist",
     },
     server: {
-      port: 5173, // Default Vite port
+      port: 5173,
       proxy: {
         "/api": {
-          target: env.VITE_API_BASE_URL || "http://localhost:5000", // Use .env variable
+          target: env.VITE_API_BASE_URL || "http://localhost:5000",
           changeOrigin: true,
           secure: false,
         },
       },
+      historyApiFallback: true, 
     },
   };
 });
