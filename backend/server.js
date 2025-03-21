@@ -16,7 +16,7 @@ app.use(express.json()); // Parse JSON body
 const allowedOrigins = [
   process.env.CLIENT_URL, // This should be set in Render's environment variables
   "http://localhost:5173", // For local development
-  "https://fermion-ic-clone.vercel.app" // Your deployed frontend URL
+  "https://fermionic-clone-1.onrender.com" // Your deployed frontend URL
 ];
 
 app.use(
