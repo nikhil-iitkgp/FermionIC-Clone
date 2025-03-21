@@ -2,7 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const path = require("path");
 
 // Load environment variables
 dotenv.config();
@@ -24,10 +23,7 @@ app.use(
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => {
     console.error("❌ MongoDB Connection Error:", err);
@@ -37,19 +33,14 @@ mongoose
 // Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
 
-// Serve Frontend (For Deployment)
-if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../frontend/dist");
-  app.use(express.static(frontendPath));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(frontendPath, "index.html"));
-  });
-}
-
 // Default Route
 app.get("/", (req, res) => {
   res.send("Welcome to FermionIC Backend API 🚀");
+});
+
+// Health Check Route (For Render)
+app.get("/healthz", (req, res) => {
+  res.status(200).send("OK");
 });
 
 // Error Handling Middleware
