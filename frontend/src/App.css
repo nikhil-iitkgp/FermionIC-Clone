@@ -1,10 +1,10 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
+/* Logo Styling */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -18,6 +18,7 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+/* Logo Animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -27,16 +28,26 @@
   }
 }
 
+/* Apply Animation to Specific Logo */
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
 
+/* Card Styling */
 .card {
   padding: 2em;
+  @apply bg-card text-card-foreground shadow-lg rounded-lg;
 }
 
+/* Read the Docs Text */
 .read-the-docs {
   color: #888;
+}
+
+/* Ensure Hero and Footer take full width */
+.hero, .footer {
+  width: 100%;
+  max-width: 100%;
 }

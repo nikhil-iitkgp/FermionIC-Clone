@@ -2,19 +2,18 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="h-screen flex flex-col justify-center items-center text-center bg-black text-white px-6">
-      {/* Animated Heading */}
-      <motion.h1 
+    <section className="h-screen flex flex-col justify-center items-center text-center bg-black text-white w-full">      {/* Animated Heading */}
+      <motion.h1
         className="text-5xl font-bold"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        Fermionic Clone
+        Fermionic Clone{" "}
       </motion.h1>
 
       {/* Subheading */}
-      <motion.p 
+      <motion.p
         className="text-lg text-gray-400 mt-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,7 +23,7 @@ const Hero = () => {
       </motion.p>
 
       {/* Call-to-Action Buttons */}
-      <motion.div 
+      <motion.div
         className="mt-6 flex space-x-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

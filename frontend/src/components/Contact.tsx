@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { MapPin, Send } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Card } from "../components/ui/card";
+import { Textarea } from "../components/ui/textarea";
+import { Label } from "../components/ui/label";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Contact = () => {
-  // State to store form data
+  // State for form data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -13,21 +20,25 @@ const Contact = () => {
     message: "",
   });
 
-  // State for submission status
+  // State for form status
   const [status, setStatus] = useState({ success: false, error: "" });
 
-  // Handle Input Change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+  // Handle input changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle Form Submission
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus({ success: false, error: "" });
 
     try {
-      const response = await fetch("http://localhost:5000/api/contact", {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,143 +56,143 @@ const Contact = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen flex flex-col bg-gray-50">
+    <div className="w-screen min-h-screen flex flex-col bg-gray-900 text-white">
       {/* Header */}
       <Header />
 
-      {/* Contact Page Content */}
-      <main className="flex-1 flex flex-col items-center px-4 sm:px-8 lg:px-16 py-12">
-        <div className="max-w-4xl text-center">
-          <h1 className="text-4xl font-bold text-gray-900">Get in Touch with Us</h1>
-          <p className="text-lg text-gray-700 mt-4">
-            Please leave your requirements, and we shall get back to you.
+      {/* Page Content */}
+      <motion.main
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="flex-1 flex flex-col items-center px-6 sm:px-12 lg:px-24 py-24"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="max-w-4xl text-center"
+        >
+          <h1 className="text-5xl font-extrabold text-white leading-tight">
+            Get in Touch with Us
+          </h1>
+          <p className="text-lg text-gray-300 mt-4">
+            Leave your message, and we'll get back to you as soon as possible.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Address Section */}
-        <div className="grid md:grid-cols-2 gap-8 mt-12 w-full max-w-4xl">
-          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-            <h3 className="text-2xl font-semibold text-gray-900">Main Office Address</h3>
-            <p className="mt-3 text-gray-700">
-              FermionIC Design Private Limited <br />
-              GVR Vision, 268, 3rd Floor, AECS Layout - A Block, Marathahalli, <br />
-              Bengaluru, Karnataka 560037, India
-            </p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-            <h3 className="text-2xl font-semibold text-gray-900">Sales Office Address</h3>
-            <p className="mt-3 text-gray-700">
-              FermionIC Design Private Limited <br />
-              Inspire Workplace, 134-135, Service Rd, LRDE Layout, <br />
-              Doddanekkundi, Bangalore, Karnataka 560037, India
-            </p>
-          </div>
+        {/* Office Locations */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 w-full max-w-5xl">
+          {[
+            {
+              title: "Main Office",
+              address: `FermionIC Design Pvt Ltd
+                GVR Vision, 268, 3rd Floor, AECS Layout - A Block, Marathahalli,
+                Bengaluru, Karnataka 560037, India`,
+              iconColor: "text-blue-400",
+            },
+            {
+              title: "Sales Office",
+              address: `FermionIC Design Pvt Ltd
+                Inspire Workplace, 134-135, Service Rd, LRDE Layout,
+                Doddanekkundi, Bangalore, Karnataka 560037, India`,
+              iconColor: "text-green-400",
+            },
+          ].map((office, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              <Card className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
+                <h3 className="text-2xl font-semibold flex items-center gap-2 text-white">
+                  <MapPin className={office.iconColor} /> {office.title}
+                </h3>
+                <p className="mt-3 text-gray-300 whitespace-pre-line">
+                  {office.address}
+                </p>
+              </Card>
+            </motion.div>
+          ))}
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white mt-12 p-8 shadow-lg rounded-lg border border-gray-200 w-full max-w-3xl">
-          <h2 className="text-3xl font-semibold text-center text-gray-900 mb-6">Send Us a Message</h2>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4 }}
+          className="bg-gray-800 mt-16 p-8 shadow-lg rounded-lg border border-gray-700 w-full max-w-4xl"
+        >
+          <h2 className="text-3xl font-semibold text-center mb-6">
+            Send Us a Message
+          </h2>
 
           {status.success && (
-            <p className="text-green-600 text-center mb-4">Message sent successfully!</p>
+            <p className="text-green-500 text-center mb-4">
+              Message sent successfully!
+            </p>
           )}
-          {status.error && <p className="text-red-600 text-center mb-4">{status.error}</p>}
+          {status.error && (
+            <p className="text-red-500 text-center mb-4">{status.error}</p>
+          )}
 
           <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="grid md:grid-cols-2 gap-4">
+            {/* First & Last Name */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-700 font-medium mb-1">First Name</label>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white text-black"
-                  placeholder="Enter your first name"
-                  required
-                />
+                <Label htmlFor="firstName" className="text-gray-300">
+                  First Name
+                </Label>
+                <Input id="firstName" name="firstName" value={formData.firstName} onChange={handleChange} required />
               </div>
-
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Last Name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white text-black"
-                  placeholder="Enter your last name"
-                  required
-                />
+                <Label htmlFor="lastName" className="text-gray-300">
+                  Last Name
+                </Label>
+                <Input id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4">
+            {/* Email & Phone */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black"
-                  placeholder="Enter your email"
-                  required
-                />
+                <Label htmlFor="email" className="text-gray-300">
+                  Email
+                </Label>
+                <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
               </div>
-
               <div>
-                <label className="block text-gray-700 font-medium mb-1">Phone</label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black "
-                  placeholder="Enter your phone number"
-                  required
-                />
+                <Label htmlFor="phone" className="text-gray-300">
+                  Phone
+                </Label>
+                <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
               </div>
             </div>
 
+            {/* Address & Message */}
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Address</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-black "
-                placeholder="Enter your address"
-                required
-              />
+              <Label htmlFor="address" className="text-gray-300">
+                Address
+              </Label>
+              <Textarea id="address" name="address" value={formData.address} onChange={handleChange} rows={2} required />
             </div>
-
             <div>
-              <label className="block text-gray-700 font-medium mb-1">Type your message here...</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500  bg-white text-black"
-                rows={4}
-                placeholder="Enter your message"
-                required
-              ></textarea>
+              <Label htmlFor="message" className="text-gray-300">
+                Message
+              </Label>
+              <Textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={4} required />
             </div>
 
+            {/* Submit Button */}
             <div className="text-center">
-              <button
-                type="submit"
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition duration-300"
-              >
-                Submit
-              </button>
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
+                <Send size={20} /> Send Message
+              </Button>
             </div>
           </form>
-        </div>
-      </main>
+        </motion.div>
+      </motion.main>
 
       {/* Footer */}
       <Footer />

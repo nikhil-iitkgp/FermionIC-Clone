@@ -4,9 +4,9 @@ import Header from "../components/Header";
 
 const Home = () => {
   return (
-    <div className="w-screen mx-auto min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-black text-white flex flex-col overflow-x-hidden">
       <Header />
-      <main className="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+      <main className="flex-1 flex items-center justify-center w-full">
         <Hero />
       </main>
       <Footer />

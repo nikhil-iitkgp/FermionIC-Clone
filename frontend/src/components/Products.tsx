@@ -18,26 +18,44 @@ const products = [
     description: "Powerful tools for AI model training & deployment.",
     image: "https://source.unsplash.com/400x300/?software,code",
   },
+  {
+    title: "Edge AI Processor",
+    description: "Efficient AI computing at the edge for real-time applications.",
+    image: "https://source.unsplash.com/400x300/?edge,ai",
+  },
+  {
+    title: "AI Model Compression Toolkit",
+    description: "Optimized AI models for lower latency and power efficiency.",
+    image: "https://source.unsplash.com/400x300/?ai,optimization",
+  },
+  {
+    title: "AI Security Module",
+    description: "Secure AI data processing with advanced cryptography.",
+    image: "https://source.unsplash.com/400x300/?security,ai",
+  }
 ];
 
 const Products = () => {
   return (
-    <div className="container w-screen mx-auto  ">
+    <div className="w-screen min-h-screen bg-black text-white flex flex-col">
       <Header />
-      <section className="py-16 bg-black text-white">
-        <div className="text-center">
+      
+      {/* Main Content */}
+      <section className="flex flex-col items-center pt-24 pb-16 text-white w-full">
+        {/* Title Section */}
+        <div className="text-center w-full">
           <h2 className="text-4xl font-bold">Our Products</h2>
-          <p className="text-gray-400 mt-2">
-            Explore cutting-edge AI solutions
-          </p>
+          <p className="text-gray-400 mt-2">Explore cutting-edge AI solutions</p>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 max-w-7xl mx-auto">
+        {/* Product Grid */}
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 gap-y-10 px-6 w-full max-w-7xl">
           {products.map((product, index) => (
             <ProductCard key={index} {...product} />
           ))}
         </div>
       </section>
+
       <Footer />
     </div>
   );

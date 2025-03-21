@@ -5,17 +5,20 @@ import SiliconIp from "./pages/SiliconIP";
 import About from "./components/About";
 import Careers from "./components/Careers";
 import Contact from "./components/Contact";
+import "./index.css";
+import "./App.css"; 
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/silicon-ip" element={<SiliconIp />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about-us" element={<About />} />
         <Route path="/careers" element={<Careers />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact-us" element={<Contact />} />
       </Routes>
     </Router>
   );
