@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 
 // Load environment variables
 dotenv.config();
@@ -16,7 +17,7 @@ app.use(express.json()); // Parse JSON body
 const allowedOrigins = [
   process.env.CLIENT_URL, // This should be set in Render's environment variables
   "http://localhost:5173", // For local development
-  "https://fermionic-clone-1.onrender.com" // Your deployed frontend URL
+  "https://fermion-ic-clone.vercel.app" // Your deployed frontend URL
 ];
 
 app.use(
@@ -38,9 +39,13 @@ mongoose
 // Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
 
-// Default Route
-app.get("/", (req, res) => {
-  res.send("Welcome to FermionIC Backend API 🚀");
+// Serve static files from frontend build
+const frontendPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendPath));
+
+// Handle React routes (Fixes refresh issue)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // Health Check Route (For Render)
