@@ -36,14 +36,17 @@ mongoose
     process.exit(1);
   });
 
-// Routes
+// Serve frontend static files
+const frontendPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(frontendPath));
+
+// API Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
 
-// Redirect all unknown API routes to frontend URL
+// Handle React frontend routing (for non-API routes)
 app.get("*", (req, res) => {
-  res.redirect(process.env.CLIENT_URL || "https://fermionic-clone-1.onrender.com");
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
-
 
 // Health Check Route (For Render)
 app.get("/healthz", (req, res) => {
