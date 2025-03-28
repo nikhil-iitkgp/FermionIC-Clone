@@ -9,25 +9,29 @@ const slides = [
     image:
       "https://static.wixstatic.com/media/ee7e9e_67e4e18d91774f0a80ff09a92ab81fee~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_67e4e18d91774f0a80ff09a92ab81fee~mv2.jpeg",
     title: "Quantum-Inspired AI Acceleration",
-    description: "Revolutionizing AI with next-gen quantum-enhanced processing units.",
+    description:
+      "Revolutionizing AI with next-gen quantum-enhanced processing units.",
   },
   {
     image:
       "https://static.wixstatic.com/media/ee7e9e_44e900e195714f6083621527ed6fcc02~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_44e900e195714f6083621527ed6fcc02~mv2.jpeg",
     title: "Advanced Semiconductor Fabrication",
-    description: "Pioneering nano-scale semiconductor manufacturing for ultra-fast computing.",
+    description:
+      "Pioneering nano-scale semiconductor manufacturing for ultra-fast computing.",
   },
   {
     image:
       "https://static.wixstatic.com/media/ee7e9e_ed1316d7fb5b4d1f87ba30b6c5414fa6~mv2.jpg/v1/fill/w_1365,h_719,al_c,q_85,enc_avif,quality_auto/ee7e9e_ed1316d7fb5b4d1f87ba30b6c5414fa6~mv2.jpg",
     title: "Optimized AI Workloads",
-    description: "High-performance AI computation with energy-efficient hardware acceleration.",
+    description:
+      "High-performance AI computation with energy-efficient hardware acceleration.",
   },
   {
     image:
       "https://static.wixstatic.com/media/ee7e9e_36eb1603ff5b4a809cf45479bcae6997~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_36eb1603ff5b4a809cf45479bcae6997~mv2.jpeg",
     title: "AI-Driven Chip Design",
-    description: "Redefining chip architecture with AI-powered design and automation.",
+    description:
+      "Redefining chip architecture with AI-powered design and automation.",
   },
 ];
 
@@ -91,19 +95,26 @@ const Hero = () => {
         </motion.p>
       </div>
 
-      {/* Left & Right Navigation Buttons */}
+      {/* Left Navigation Button */}
       <Button
-        className="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black transition-all"
+        className="absolute left-2 md:left-10 top-1/2 transform -translate-y-1/2 
+            text-white bg-black/50 p-4 md:p-3 rounded-full hover:bg-black transition-all 
+            z-20 w-12 h-12 flex items-center justify-center"
         onClick={prevSlide}
+        aria-label="Previous Slide"
       >
-        <FaChevronLeft size={30} />
+        <FaChevronLeft size={24} />
       </Button>
 
+      {/* Right Navigation Button */}
       <Button
-        className="absolute right-4 md:right-10 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black transition-all"
+        className="absolute right-2 md:right-10 top-1/2 transform -translate-y-1/2 
+            text-white bg-black/50 p-4 md:p-3 rounded-full hover:bg-black transition-all 
+            z-20 w-12 h-12 flex items-center justify-center"
         onClick={nextSlide}
+        aria-label="Next Slide"
       >
-        <FaChevronRight size={30} />
+        <FaChevronRight size={24} />
       </Button>
 
       {/* Slide Indicator Dots (Bottom) */}
