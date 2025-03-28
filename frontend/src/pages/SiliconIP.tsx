@@ -73,7 +73,7 @@ const SiliconIP = () => {
         variants={fadeInVariants}
         className="max-w-7xl mx-auto px-6 py-12 text-center mt-20"
       >
-        <h1 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+        <h1 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
           Silicon IP Portfolio
         </h1>
         <p className="text-lg text-gray-400 max-w-3xl mx-auto mt-4">

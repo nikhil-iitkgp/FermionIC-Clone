@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Send } from "lucide-react";
+import { toast } from "react-hot-toast"; 
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Card } from "../components/ui/card";
@@ -10,7 +11,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Contact = () => {
-  // State for form data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -20,22 +20,18 @@ const Contact = () => {
     message: "",
   });
 
-  // State for form status
-  const [status, setStatus] = useState({ success: false, error: "" });
-
+  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ Track submission status
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-  // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus({ success: false, error: "" });
+    setIsSubmitting(true);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/contact`, {
@@ -48,25 +44,33 @@ const Contact = () => {
 
       if (!response.ok) throw new Error("Failed to send message");
 
-      setStatus({ success: true, error: "" });
-      setFormData({ firstName: "", lastName: "", email: "", phone: "", address: "", message: "" });
+      toast.success("Message sent successfully! 🎉"); 
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        address: "",
+        message: "",
+      });
     } catch (error) {
-      setStatus({ success: false, error: "Error sending message. Try again!" });
+      toast.error("Error sending message. Please try again. ❌"); 
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <div className="w-screen min-h-screen flex flex-col bg-gray-900 text-white">
-      {/* Header */}
       <Header />
 
-      {/* Page Content */}
       <motion.main
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="flex-1 flex flex-col items-center px-6 sm:px-12 lg:px-24 py-24"
       >
+        {/* Page Heading */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -128,15 +132,6 @@ const Contact = () => {
             Send Us a Message
           </h2>
 
-          {status.success && (
-            <p className="text-green-500 text-center mb-4">
-              Message sent successfully!
-            </p>
-          )}
-          {status.error && (
-            <p className="text-red-500 text-center mb-4">{status.error}</p>
-          )}
-
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* First & Last Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -184,17 +179,21 @@ const Contact = () => {
               <Textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={4} required />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit Button (Styled like Product Page) */}
             <div className="text-center">
-              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2">
-                <Send size={20} /> Send Message
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105 hover:from-blue-600 hover:to-blue-800 flex items-center gap-2"
+                disabled={isSubmitting} // ✅ Disable button when submitting
+              >
+                <Send size={20} />
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </div>
           </form>
         </motion.div>
       </motion.main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );
