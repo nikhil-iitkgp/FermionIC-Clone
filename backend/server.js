@@ -36,17 +36,9 @@ mongoose
     process.exit(1);
   });
 
-// Serve frontend static files
-const frontendPath = path.join(__dirname, "../frontend/dist");
-app.use(express.static(frontendPath));
 
 // API Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
-
-// Handle React frontend routing (for non-API routes)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(frontendPath, "index.html"));
-});
 
 // Health Check Route (For Render)
 app.get("/healthz", (req, res) => {
