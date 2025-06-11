@@ -52,18 +52,18 @@ const Footer = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <Link to="#" className="text-gray-400 hover:text-blue-400 transition">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
             <LuFacebook size={24} />
-          </Link>
-          <Link to="#" className="text-gray-400 hover:text-blue-400 transition">
+          </a>
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
             <LuTwitter size={24} />
-          </Link>
-          <Link to="#" className="text-gray-400 hover:text-blue-400 transition">
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
             <LuLinkedin size={24} />
-          </Link>
-          <Link to="#" className="text-gray-400 hover:text-blue-400 transition">
+          </a>
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition">
             <LuGithub size={24} />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </motion.footer>
