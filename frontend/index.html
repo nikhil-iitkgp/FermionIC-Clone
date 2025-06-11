@@ -5,49 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
-    <meta name="fragment" content="!" />
     <title>Fermionic</title>
-    <script>
-      // Check if we've been redirected from 404.html with a path parameter
-      const urlParams = new URLSearchParams(window.location.search);
-      const path = urlParams.get('path');
-      
-      if (path) {
-        // Clean the URL by replacing the current state
-        window.history.replaceState(null, null, path);
-      }
-      
-      // URL cleaner for hash-based routing
-      (function() {
-        // Don't execute on localhost
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
-        
-        // Listen for hashchange and update history state with clean URL
-        window.addEventListener('hashchange', function() {
-          const hashPath = window.location.hash.substring(1); // Remove # symbol
-          if (hashPath && !window.location.search) {
-            // Update URL in address bar to look cleaner (without actual navigation)
-            try {
-              window.history.replaceState(null, null, hashPath);
-            } catch (e) {
-              console.error('Error updating URL:', e);
-            }
-          }
-        });
-        
-        // Initial load handling
-        if (window.location.hash) {
-          const hashPath = window.location.hash.substring(1); // Remove # symbol
-          if (hashPath && !window.location.search) {
-            try {
-              window.history.replaceState(null, null, hashPath);
-            } catch (e) {
-              console.error('Error updating URL:', e);
-            }
-          }
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: fermionic-clone-1
-    buildCommand: npm run build
-    staticPublishPath: ./dist
-    routes:
-      - source: /*
-        destination: /index.html 
