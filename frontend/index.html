@@ -8,14 +8,23 @@
     <meta name="fragment" content="!" />
     <title>Fermionic</title>
     <script>
+      // Check if we've been redirected from 404.html with a path parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const path = urlParams.get('path');
+      
+      if (path) {
+        // Clean the URL by replacing the current state
+        window.history.replaceState(null, null, path);
+      }
+      
       // This helps with direct navigation
       (function() {
         // Don't run this in the development environment
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
         
         // Extract path and redirect if necessary
-        const path = window.location.pathname;
-        if (path !== '/' && !window.location.search && !window.location.hash) {
+        const currentPath = window.location.pathname;
+        if (currentPath !== '/' && !window.location.search && !window.location.hash) {
           window.history.replaceState(null, null, '/' + window.location.hash);
         }
       })();
