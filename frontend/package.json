@@ -27,7 +27,6 @@
     "shadcn-ui": "^0.9.5",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
-    "vite-plugin-history": "^1.0.2",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
