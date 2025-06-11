@@ -22,10 +22,6 @@ export default defineConfig({
     port: 3000
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: undefined,
-      },
-    },
+    outDir: "dist",
   },
 });
