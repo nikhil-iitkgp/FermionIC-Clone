@@ -17,15 +17,34 @@
         window.history.replaceState(null, null, path);
       }
       
-      // This helps with direct navigation
+      // URL cleaner for hash-based routing
       (function() {
-        // Don't run this in the development environment
+        // Don't execute on localhost
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
         
-        // Extract path and redirect if necessary
-        const currentPath = window.location.pathname;
-        if (currentPath !== '/' && !window.location.search && !window.location.hash) {
-          window.history.replaceState(null, null, '/' + window.location.hash);
+        // Listen for hashchange and update history state with clean URL
+        window.addEventListener('hashchange', function() {
+          const hashPath = window.location.hash.substring(1); // Remove # symbol
+          if (hashPath && !window.location.search) {
+            // Update URL in address bar to look cleaner (without actual navigation)
+            try {
+              window.history.replaceState(null, null, hashPath);
+            } catch (e) {
+              console.error('Error updating URL:', e);
+            }
+          }
+        });
+        
+        // Initial load handling
+        if (window.location.hash) {
+          const hashPath = window.location.hash.substring(1); // Remove # symbol
+          if (hashPath && !window.location.search) {
+            try {
+              window.history.replaceState(null, null, hashPath);
+            } catch (e) {
+              console.error('Error updating URL:', e);
+            }
+          }
         }
       })();
     </script>
