@@ -17,130 +17,133 @@ const InteractiveItems = () => {
     "Power Management",
     "Radio",
     "AI Accelerator",
-    "SoC Integration"
+    "SoC Integration",
   ];
 
-  // Calculate positions for circular layout
-  const radius = 200; // Distance from center
+  // Calculate positions for circular layout - responsive radius
+  const radius = 200; // Base radius, will be scaled by CSS
   const centerAngle = Math.PI / 2; // Start from top
   const angleStep = (2 * Math.PI) / items.length;
 
-         return (
-     <div className="relative w-full h-96 flex items-center justify-center mt-8">
-       {/* CSS-based Arrow Lines */}
-       {items.map((_item, index) => {
-         const angle = centerAngle + index * angleStep;
-         const x = Math.cos(angle) * 1.5 * radius;
-         const y = Math.sin(angle) * 1.5 * radius;
-         
-         // Calculate arrow properties
-         const arrowLength = Math.sqrt(x * x + y * y);
-         const arrowAngle = Math.atan2(y, x) * 180 / Math.PI;
-         
-         return (
-           <motion.div
-             key={`arrow-${index}`}
-             className="absolute pointer-events-none"
-             style={{
-               width: `${arrowLength}px`,
-               height: '3px',
-               background: 'linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
-               borderRadius: '2px',
-               transformOrigin: 'left center',
-               left: '50%',
-               top: '50%',
-               zIndex: 10
-             }}
-             initial={{ 
-               scaleX: 0, 
-               opacity: 0,
-               rotate: arrowAngle
-             }}
-             animate={{ 
-               scaleX: 1, 
-               opacity: 1,
-               rotate: arrowAngle
-             }}
-             transition={{
-               duration: 1,
-               delay: index * 0.2 + 0.5,
-               ease: "easeOut"
-             }}
-           >
-             {/* Arrow Head */}
-             <motion.div
-               className="absolute right-0 top-1/2 transform -translate-y-1/2 w-0 h-0"
-               style={{
-                 borderLeft: '8px solid rgba(255, 255, 255, 0.9)',
-                 borderTop: '4px solid transparent',
-                 borderBottom: '4px solid transparent',
-                 marginRight: '-8px'
-               }}
-               initial={{ opacity: 0 }}
-               animate={{ opacity: 1 }}
-               transition={{
-                 duration: 0.5,
-                 delay: index * 0.2 + 1.5,
-                 ease: "easeOut"
-               }}
-             />
-           </motion.div>
-         );
-       })}
+  return (
+    <div className="relative w-full h-64 md:h-96 flex items-center justify-center mt-4 md:mt-8 interactive-container">
+      {/* CSS-based Arrow Lines */}
+      {items.map((_item, index) => {
+        const isMobile =
+          typeof window !== "undefined" && window.innerWidth < 768;
+        const arrowMultiplier = isMobile ? 1 : 1.5;
+        const angle = centerAngle + index * angleStep;
+        const x = Math.cos(angle) * arrowMultiplier * radius;
+        const y = Math.sin(angle) * arrowMultiplier * radius;
+        // Calculate arrow properties
+        const arrowLength = Math.sqrt(x * x + y * y);
+        const arrowAngle = (Math.atan2(y, x) * 180) / Math.PI;
+        return (
+          <motion.div
+            key={`arrow-${index}`}
+            className="absolute pointer-events-none h-[2px] md:h-[3px]"
+            style={{
+              width: `${arrowLength}px`,
+              background:
+                "linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)",
+              borderRadius: "2px",
+              transformOrigin: "left center",
+              left: "50%",
+              top: "50%",
+              zIndex: 10,
+            }}
+            initial={{
+              scaleX: 0,
+              opacity: 0,
+              rotate: arrowAngle,
+            }}
+            animate={{
+              scaleX: 1,
+              opacity: 1,
+              rotate: arrowAngle,
+            }}
+            transition={{
+              duration: 1,
+              delay: index * 0.2 + 0.5,
+              ease: "easeOut",
+            }}
+          >
+            {/* Arrow Head */}
+            <motion.div
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 w-0 h-0 md:border-l-[8px] md:border-t-[4px] md:border-b-[4px] md:-mr-2 border-l-[6px] border-t-[3px] border-b-[3px] -mr-1.5"
+              style={{
+                borderLeft: "8px solid rgba(255, 255, 255, 0.9)",
+                borderTop: "4px solid transparent",
+                borderBottom: "4px solid transparent",
+                marginRight: "-8px",
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.2 + 1.5,
+                ease: "easeOut",
+              }}
+            />
+          </motion.div>
+        );
+      })}
 
       {/* Center Title */}
       <motion.div
-        className="absolute z-20 bg-black/80 backdrop-blur-lg rounded-xl px-8 py-6 border-2 border-cyan-400/50 shadow-2xl"
+        className="absolute z-20 bg-black/80 backdrop-blur-lg rounded-xl px-4 md:px-8 py-3 md:py-6 border-2 border-cyan-400/50 shadow-2xl"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
         whileHover={{ scale: 1.05 }}
       >
-        <h3 className="text-2xl md:text-3xl font-orbitron font-bold text-white text-center drop-shadow-lg">
+        <h2 className="text-lg md:text-2xl lg:text-3xl font-orbitron font-bold text-white text-center drop-shadow-lg">
           Integrated Semiconductor Solutions
-        </h3>
+        </h2>
       </motion.div>
 
       {/* Circular Items */}
       {items.map((item, index) => {
+        const isMobile =
+          typeof window !== "undefined" && window.innerWidth < 768;
+        const arrowMultiplier = isMobile ? 1 : 1.35;
         const angle = centerAngle + index * angleStep;
-        const x = Math.cos(angle) * 1.5*radius;
-        const y = Math.sin(angle) * 1.5*radius;
-
+        const x = Math.cos(angle) * arrowMultiplier * radius;
+        const y = Math.sin(angle) * arrowMultiplier * radius;
         return (
           <motion.div
             key={item}
-            className="absolute bg-black/90 backdrop-blur-lg rounded-xl px-6 py-4 border-2 border-cyan-400/60 shadow-2xl"
+            className="absolute bg-black/90 backdrop-blur-lg rounded-xl px-3 md:px-6 py-2 md:py-4 border-2 border-cyan-400/60 shadow-2xl w-[140px] md:w-[200px]"
             style={{
-              width: '200px',
-              textAlign: 'center',
-              zIndex: 15
+              textAlign: "center",
+              zIndex: 15,
             }}
-            initial={{ 
-              scale: 0, 
+            initial={{
+              scale: 0,
               opacity: 0,
               x: 0,
-              y: 0
+              y: 0,
             }}
-            animate={{ 
+            animate={{
               scale: 1,
               opacity: 1,
               x: x,
-              y: y
+              y: y,
             }}
             transition={{
               duration: 1.25,
               delay: index * 0.2,
-              ease: "easeOut"
+              ease: "easeOut",
             }}
-            whileHover={{ 
+            whileHover={{
               scale: 1.15,
               backgroundColor: "rgba(0, 0, 0, 0.95)",
               borderColor: "rgba(0, 212, 255, 0.8)",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 212, 255, 0.3)"
+              boxShadow:
+                "0 20px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 212, 255, 0.3)",
             }}
           >
-            <div className="text-base font-rajdhani font-semibold text-white leading-tight drop-shadow-lg">
+            <div className="text-xs md:text-base font-rajdhani font-semibold text-white leading-tight drop-shadow-lg">
               {item}
             </div>
           </motion.div>
@@ -172,7 +175,8 @@ const slides = [
   {
     image: integratedSolutions,
     title: "Integrated Semiconductor Solutions",
-    description:"Comprehensive semiconductor integration featuring analog mixed-signal modules, power management, radio frequency, AI acceleration, and SoC integration.",
+    description:
+      "Comprehensive semiconductor integration featuring analog mixed-signal modules, power management, radio frequency, AI acceleration, and SoC integration.",
   },
 ];
 
@@ -202,7 +206,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center text-center bg-black text-white w-full">
+    <section className="relative min-h-[70vh] h-screen flex flex-col justify-center items-center text-center bg-black text-white w-full">
       {/* Image Slider */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <motion.img
@@ -217,7 +221,7 @@ const Hero = () => {
       </div>
 
       {/* Overlay Content */}
-      <div className="relative z-10 flex flex-col items-center px-6">
+      <div className="relative z-10 flex flex-col items-center px-2 xs:px-4 sm:px-6 md:px-8 lg:px-12">
         {/* For Slide 4, show only the interactive items */}
         {index === 3 ? (
           <motion.div
@@ -231,9 +235,10 @@ const Hero = () => {
         ) : (
           <>
             {/* Animated Heading */}
+
             <motion.h1
               key={slides[index].title}
-              className="text-4xl md:text-6xl font-orbitron font-black text-white drop-shadow-2xl bg-black/30 backdrop-blur-sm px-8 py-4 rounded-xl border border-cyan-400/30"
+              className="text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-orbitron font-black text-white drop-shadow-2xl bg-black/30 backdrop-blur-sm px-2 xs:px-4 sm:px-8 md:px-10 lg:px-12 py-2 xs:py-3 md:py-4 rounded-xl border border-cyan-400/30 max-w-[90vw] sm:max-w-2xl md:max-w-4xl lg:max-w-5xl"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
@@ -244,7 +249,7 @@ const Hero = () => {
             {/* Subheading */}
             <motion.p
               key={slides[index].description}
-              className="text-lg font-rajdhani font-medium text-white mt-6 max-w-3xl bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-cyan-400/20 drop-shadow-lg"
+              className="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl font-rajdhani font-medium text-white mt-2 xs:mt-3 sm:mt-4 md:mt-6 max-w-[90vw] xs:max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl bg-black/40 backdrop-blur-sm px-2 xs:px-3 sm:px-6 md:px-8 py-1.5 xs:py-2 sm:py-2.5 md:py-3 rounded-lg border border-cyan-400/20 drop-shadow-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}

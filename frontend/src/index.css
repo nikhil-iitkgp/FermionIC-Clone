@@ -13,6 +13,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Fix for webkit text-size-adjust compatibility */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* Global Links */
@@ -190,6 +195,13 @@ button:focus-visible {
 .hero, .footer {
   width: 100%;
   max-width: 100%;
+}
+
+/* Responsive scaling for slide 4 interactive items */
+@media (max-width: 768px) {
+  .interactive-container {
+    transform: scale(0.7);
+  }
 }
 
 html, body {
