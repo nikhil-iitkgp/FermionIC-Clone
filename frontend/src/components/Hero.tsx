@@ -28,7 +28,7 @@ const InteractiveItems = () => {
          return (
      <div className="relative w-full h-96 flex items-center justify-center mt-8">
        {/* CSS-based Arrow Lines */}
-       {items.map((item, index) => {
+       {items.map((_item, index) => {
          const angle = centerAngle + index * angleStep;
          const x = Math.cos(angle) * 1.5 * radius;
          const y = Math.sin(angle) * 1.5 * radius;
