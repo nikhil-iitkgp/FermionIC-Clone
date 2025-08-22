@@ -13,7 +13,9 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
         {/* Brand Name */}
         <div className="text-center md:text-left">
-          <h2 className="text-2xl font-orbitron font-black tracking-widest logo-gradient">SIKTASYS</h2>
+          <h2 className="text-2xl font-orbitron font-black tracking-widest logo-gradient">
+            SIKTASYS
+          </h2>
           <p className="text-gray-300 text-sm mt-2 font-rajdhani">
             © 2025 All rights reserved.
           </p>
@@ -37,6 +39,9 @@ const Footer = () => {
               <Link
                 to={`/${item.toLowerCase().replace(/\s/g, "-")}`}
                 className="relative group text-white hover:text-cyan-400 transition duration-300 font-rajdhani font-medium"
+                onClick={() =>
+                  window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+                }
               >
                 {item}
                 <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
@@ -52,16 +57,36 @@ const Footer = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
+          >
             <LuFacebook size={24} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110">
+          <a
+            href="https://twitter.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
+          >
             <LuTwitter size={24} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110">
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
+          >
             <LuLinkedin size={24} />
           </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
+          >
             <LuGithub size={24} />
           </a>
         </motion.div>
