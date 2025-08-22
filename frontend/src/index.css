@@ -138,6 +138,45 @@ button:focus-visible {
   }
 }
 
+/* Custom Font Classes */
+.font-orbitron {
+  font-family: 'Orbitron', monospace;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Logo Gradient Animation */
+.logo-gradient {
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 25%, #0066ff 50%, #6600ff 75%, #ff0066 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Logo Hover Effect */
+.logo-hover {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+}
+
+.logo-hover:hover {
+  filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.8));
+  transform: scale(1.05);
+}
+
 /* Navigation Buttons */
 .btn-nav {
   @apply text-white text-lg font-medium transition duration-300 hover:text-blue-400;

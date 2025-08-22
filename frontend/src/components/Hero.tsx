@@ -4,47 +4,193 @@ import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // For navigation icons
 import { Button } from "../components/ui/button";
 
+// Import images
+import advancedSiliconIP from "../assets/Advanced Silicon IP.jpg";
+import semiconductorInnovation from "../assets/semiconductor Product Innovation.jpg";
+import applicationSoCs from "../assets/Application Specific SoCs.jpg";
+import integratedSolutions from "../assets/Integrated Semiconductor Solution.jpg";
+
+// Interactive items for slide 4
+const InteractiveItems = () => {
+  const items = [
+    "Analog Mixed Signal Modules",
+    "Power Management",
+    "Radio",
+    "AI Accelerator",
+    "SoC Integration"
+  ];
+
+  // Calculate positions for circular layout
+  const radius = 200; // Distance from center
+  const centerAngle = Math.PI / 2; // Start from top
+  const angleStep = (2 * Math.PI) / items.length;
+
+         return (
+     <div className="relative w-full h-96 flex items-center justify-center mt-8">
+       {/* CSS-based Arrow Lines */}
+       {items.map((item, index) => {
+         const angle = centerAngle + index * angleStep;
+         const x = Math.cos(angle) * 1.5 * radius;
+         const y = Math.sin(angle) * 1.5 * radius;
+         
+         // Calculate arrow properties
+         const arrowLength = Math.sqrt(x * x + y * y);
+         const arrowAngle = Math.atan2(y, x) * 180 / Math.PI;
+         
+         return (
+           <motion.div
+             key={`arrow-${index}`}
+             className="absolute pointer-events-none"
+             style={{
+               width: `${arrowLength}px`,
+               height: '3px',
+               background: 'linear-gradient(90deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.6) 100%)',
+               borderRadius: '2px',
+               transformOrigin: 'left center',
+               left: '50%',
+               top: '50%',
+               zIndex: 10
+             }}
+             initial={{ 
+               scaleX: 0, 
+               opacity: 0,
+               rotate: arrowAngle
+             }}
+             animate={{ 
+               scaleX: 1, 
+               opacity: 1,
+               rotate: arrowAngle
+             }}
+             transition={{
+               duration: 1,
+               delay: index * 0.2 + 0.5,
+               ease: "easeOut"
+             }}
+           >
+             {/* Arrow Head */}
+             <motion.div
+               className="absolute right-0 top-1/2 transform -translate-y-1/2 w-0 h-0"
+               style={{
+                 borderLeft: '8px solid rgba(255, 255, 255, 0.9)',
+                 borderTop: '4px solid transparent',
+                 borderBottom: '4px solid transparent',
+                 marginRight: '-8px'
+               }}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{
+                 duration: 0.5,
+                 delay: index * 0.2 + 1.5,
+                 ease: "easeOut"
+               }}
+             />
+           </motion.div>
+         );
+       })}
+
+      {/* Center Title */}
+      <motion.div
+        className="absolute z-20 bg-black/80 backdrop-blur-lg rounded-xl px-8 py-6 border-2 border-cyan-400/50 shadow-2xl"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        whileHover={{ scale: 1.05 }}
+      >
+        <h3 className="text-2xl md:text-3xl font-orbitron font-bold text-white text-center drop-shadow-lg">
+          Integrated Semiconductor Solutions
+        </h3>
+      </motion.div>
+
+      {/* Circular Items */}
+      {items.map((item, index) => {
+        const angle = centerAngle + index * angleStep;
+        const x = Math.cos(angle) * 1.5*radius;
+        const y = Math.sin(angle) * 1.5*radius;
+
+        return (
+          <motion.div
+            key={item}
+            className="absolute bg-black/90 backdrop-blur-lg rounded-xl px-6 py-4 border-2 border-cyan-400/60 shadow-2xl"
+            style={{
+              width: '200px',
+              textAlign: 'center',
+              zIndex: 15
+            }}
+            initial={{ 
+              scale: 0, 
+              opacity: 0,
+              x: 0,
+              y: 0
+            }}
+            animate={{ 
+              scale: 1,
+              opacity: 1,
+              x: x,
+              y: y
+            }}
+            transition={{
+              duration: 1.25,
+              delay: index * 0.2,
+              ease: "easeOut"
+            }}
+            whileHover={{ 
+              scale: 1.15,
+              backgroundColor: "rgba(0, 0, 0, 0.95)",
+              borderColor: "rgba(0, 212, 255, 0.8)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 212, 255, 0.3)"
+            }}
+          >
+            <div className="text-base font-rajdhani font-semibold text-white leading-tight drop-shadow-lg">
+              {item}
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+};
+
 const slides = [
   {
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_67e4e18d91774f0a80ff09a92ab81fee~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_67e4e18d91774f0a80ff09a92ab81fee~mv2.jpeg",
-    title: "Quantum-Inspired AI Acceleration",
+    image: advancedSiliconIP,
+    title: "Advanced Silicon IPs",
     description:
-      "Revolutionizing AI with next-gen quantum-enhanced processing units.",
+      "Cutting-edge intellectual property cores for next-generation semiconductor designs.",
   },
   {
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_44e900e195714f6083621527ed6fcc02~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_44e900e195714f6083621527ed6fcc02~mv2.jpeg",
-    title: "Advanced Semiconductor Fabrication",
+    image: semiconductorInnovation,
+    title: "Semiconductor Product Innovation",
     description:
-      "Pioneering nano-scale semiconductor manufacturing for ultra-fast computing.",
+      "Pioneering breakthrough semiconductor solutions for tomorrow's technology challenges.",
   },
   {
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_ed1316d7fb5b4d1f87ba30b6c5414fa6~mv2.jpg/v1/fill/w_1365,h_719,al_c,q_85,enc_avif,quality_auto/ee7e9e_ed1316d7fb5b4d1f87ba30b6c5414fa6~mv2.jpg",
-    title: "Optimized AI Workloads",
+    image: applicationSoCs,
+    title: "Application Specific SoCs",
     description:
-      "High-performance AI computation with energy-efficient hardware acceleration.",
+      "Custom system-on-chip solutions tailored for specific application requirements.",
   },
   {
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_36eb1603ff5b4a809cf45479bcae6997~mv2.jpeg/v1/fill/w_1899,h_1000,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ee7e9e_36eb1603ff5b4a809cf45479bcae6997~mv2.jpeg",
-    title: "AI-Driven Chip Design",
-    description:
-      "Redefining chip architecture with AI-powered design and automation.",
+    image: integratedSolutions,
+    title: "Integrated Semiconductor Solutions",
+    description:"Comprehensive semiconductor integration featuring analog mixed-signal modules, power management, radio frequency, AI acceleration, and SoC integration.",
   },
 ];
 
 const Hero = () => {
   const [index, setIndex] = useState(0);
 
-  // Auto-change slides every 3 seconds
+  // Auto-change slides with different intervals
   useEffect(() => {
-    const interval = setInterval(() => {
+    const getSlideDelay = (slideIndex: number) => {
+      return slideIndex === 3 ? 10000 : 3000; // 10 seconds for slide 4, 3 seconds for others
+    };
+
+    const timer = setTimeout(() => {
       setIndex((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    }, getSlideDelay(index));
+
+    return () => clearTimeout(timer);
+  }, [index]);
 
   // Function to manually change slides
   const prevSlide = () => {
@@ -72,27 +218,41 @@ const Hero = () => {
 
       {/* Overlay Content */}
       <div className="relative z-10 flex flex-col items-center px-6">
-        {/* Animated Heading */}
-        <motion.h1
-          key={slides[index].title}
-          className="text-4xl md:text-6xl font-bold text-white drop-shadow-lg"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          {slides[index].title}
-        </motion.h1>
+        {/* For Slide 4, show only the interactive items */}
+        {index === 3 ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="w-full"
+          >
+            <InteractiveItems />
+          </motion.div>
+        ) : (
+          <>
+            {/* Animated Heading */}
+            <motion.h1
+              key={slides[index].title}
+              className="text-4xl md:text-6xl font-orbitron font-black text-white drop-shadow-2xl bg-black/30 backdrop-blur-sm px-8 py-4 rounded-xl border border-cyan-400/30"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+            >
+              {slides[index].title}
+            </motion.h1>
 
-        {/* Subheading */}
-        <motion.p
-          key={slides[index].description}
-          className="text-lg text-gray-300 mt-4 max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          {slides[index].description}
-        </motion.p>
+            {/* Subheading */}
+            <motion.p
+              key={slides[index].description}
+              className="text-lg font-rajdhani font-medium text-white mt-6 max-w-3xl bg-black/40 backdrop-blur-sm px-6 py-3 rounded-lg border border-cyan-400/20 drop-shadow-lg"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+            >
+              {slides[index].description}
+            </motion.p>
+          </>
+        )}
       </div>
 
       {/* Left Navigation Button */}
