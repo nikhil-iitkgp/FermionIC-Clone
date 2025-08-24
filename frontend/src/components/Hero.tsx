@@ -182,9 +182,12 @@ const slides = [
 
 const Hero = () => {
   const [index, setIndex] = useState(0);
+  const [isHeld, setIsHeld] = useState(false);
 
-  // Auto-change slides with different intervals
+  // Auto-change slides with different intervals (only when not held)
   useEffect(() => {
+    if (isHeld) return;
+
     const getSlideDelay = (slideIndex: number) => {
       return slideIndex === 3 ? 10000 : 3000; // 10 seconds for slide 4, 3 seconds for others
     };
@@ -194,7 +197,44 @@ const Hero = () => {
     }, getSlideDelay(index));
 
     return () => clearTimeout(timer);
-  }, [index]);
+  }, [index, isHeld]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      switch (event.key) {
+        case "ArrowLeft":
+          event.preventDefault();
+          prevSlide();
+          break;
+        case "ArrowRight":
+          event.preventDefault();
+          nextSlide();
+          break;
+        case " ": // Spacebar - hold slide
+          event.preventDefault();
+          setIsHeld(true);
+          break;
+        default:
+          break;
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.key === " ") {
+        event.preventDefault();
+        setIsHeld(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  }, []);
 
   // Function to manually change slides
   const prevSlide = () => {
@@ -206,7 +246,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-[70vh] h-screen flex flex-col justify-center items-center text-center bg-black text-white w-full">
+    <section className="relative min-h-[60vh] sm:min-h-[70vh] h-screen flex flex-col justify-center items-center text-center bg-black text-white w-full overflow-hidden">
       {/* Image Slider */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <motion.img
@@ -260,38 +300,56 @@ const Hero = () => {
         )}
       </div>
 
-      {/* Left Navigation Button */}
+      {/* Enhanced Left Navigation Button */}
       <Button
-        className="absolute left-2 md:left-10 top-1/2 transform -translate-y-1/2 
-            text-white bg-black/50 p-4 md:p-3 rounded-full hover:bg-black transition-all 
-            z-20 w-12 h-12 flex items-center justify-center"
+        className="absolute left-2 sm:left-4 md:left-6 lg:left-10 top-1/2 transform -translate-y-1/2 
+            text-white bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md 
+            border border-cyan-400/30 hover:border-cyan-400/60 
+            p-2 sm:p-3 md:p-4 rounded-full 
+            hover:bg-gradient-to-r hover:from-cyan-600/20 hover:to-black/60 
+            hover:shadow-lg hover:shadow-cyan-400/20 hover:scale-105 
+            transition-all duration-300 ease-in-out 
+            z-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 
+            flex items-center justify-center group"
         onClick={prevSlide}
         aria-label="Previous Slide"
       >
-        <FaChevronLeft size={24} />
+        <FaChevronLeft className="text-white group-hover:text-cyan-300 transition-colors duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
       </Button>
 
-      {/* Right Navigation Button */}
+      {/* Enhanced Right Navigation Button */}
       <Button
-        className="absolute right-2 md:right-10 top-1/2 transform -translate-y-1/2 
-            text-white bg-black/50 p-4 md:p-3 rounded-full hover:bg-black transition-all 
-            z-20 w-12 h-12 flex items-center justify-center"
+        className="absolute right-2 sm:right-4 md:right-6 lg:right-10 top-1/2 transform -translate-y-1/2 
+            text-white bg-gradient-to-r from-black/60 to-black/40 backdrop-blur-md 
+            border border-cyan-400/30 hover:border-cyan-400/60 
+            p-2 sm:p-3 md:p-4 rounded-full 
+            hover:bg-gradient-to-r hover:from-cyan-600/20 hover:to-black/60 
+            hover:shadow-lg hover:shadow-cyan-400/20 hover:scale-105 
+            transition-all duration-300 ease-in-out 
+            z-20 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 
+            flex items-center justify-center group"
         onClick={nextSlide}
         aria-label="Next Slide"
       >
-        <FaChevronRight size={24} />
+        <FaChevronRight className="text-white group-hover:text-cyan-300 transition-colors duration-300 text-sm sm:text-base md:text-lg lg:text-xl" />
       </Button>
 
-      {/* Slide Indicator Dots (Bottom) */}
-      <div className="absolute bottom-6 flex space-x-2">
-        {slides.map((_, i) => (
-          <div
-            key={i}
-            className={`w-3 h-3 rounded-full transition-all ${
-              i === index ? "bg-white" : "bg-gray-500"
-            }`}
-          />
-        ))}
+      {/* Clean Slide Indicators */}
+      <div className="absolute bottom-4 sm:bottom-6 flex justify-center w-full px-4">
+        <div className="flex space-x-3">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${
+                i === index
+                  ? "bg-cyan-400 shadow-lg shadow-cyan-400/50"
+                  : "bg-gray-400/60 hover:bg-gray-300/80"
+              }`}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
