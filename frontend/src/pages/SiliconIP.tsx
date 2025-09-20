@@ -31,40 +31,40 @@ const siliconIPData = [
     description:
       "Pipeline ADC & SAR ADC, Delta Sigma ADC, Dual Slope ADC, RF - 5 to 10 Gbps Serializer/Deserializer, 100 MSPS",
     icon: Activity,
-    gradient: "from-green-500 to-emerald-500",
-    bgGradient: "from-green-500/10 to-emerald-500/10",
+    gradient: "from-cyan-500 to-blue-500",
+    bgGradient: "from-cyan-500/10 to-blue-500/10",
   },
   {
     title: "Power Management IPs",
     description:
       "100% Digital DCDC Switched Capacitor DCDC Converters, Inductive based Buck-Boost Converters, Low Dropout Regulators, 10 mA to 1A, Battery charging Interface, Output Power levels: 100mA to 1A",
     icon: Zap,
-    gradient: "from-yellow-500 to-orange-500",
-    bgGradient: "from-yellow-500/10 to-orange-500/10",
+    gradient: "from-blue-400 to-purple-500",
+    bgGradient: "from-blue-400/10 to-purple-500/10",
   },
   {
     title: "Radiation Hardened IPs for Space Application",
     description:
       "Several Radiation Hardened by Design (RHBD) IPs with SEL Tolerant Circuit Schemes",
     icon: Shield,
-    gradient: "from-purple-500 to-violet-500",
-    bgGradient: "from-purple-500/10 to-violet-500/10",
+    gradient: "from-purple-500 to-blue-500",
+    bgGradient: "from-purple-500/10 to-blue-500/10",
   },
   {
     title: "AI Compute Cores",
     description:
       "Compute cores for AI acceleration, In Memory Compute cores for Deep Neural Network and Spiking Neural Network, Multi-core architectures for CNN modules, suitable for low power edge computing applications",
     icon: Brain,
-    gradient: "from-pink-500 to-rose-500",
-    bgGradient: "from-pink-500/10 to-rose-500/10",
+    gradient: "from-cyan-400 to-purple-400",
+    bgGradient: "from-cyan-400/10 to-purple-400/10",
   },
   {
     title: "Analog Frontend",
     description:
       "Signal Acquisition and Signal Conditioning Units, Amplification of Low Noise Amplifier, Voltage Controlled Oscillator, Frequency Stabilization, Impedance Boosting, Offset Trimming, Filtering, Current Conveyor, Instrumentation amplifier, ultra low current sensing",
     icon: Radio,
-    gradient: "from-indigo-500 to-blue-500",
-    bgGradient: "from-indigo-500/10 to-blue-500/10",
+    gradient: "from-blue-600 to-cyan-400",
+    bgGradient: "from-blue-600/10 to-cyan-400/10",
   },
 ];
 
