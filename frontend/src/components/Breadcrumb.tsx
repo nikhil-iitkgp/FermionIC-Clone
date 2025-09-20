@@ -60,7 +60,7 @@ const Breadcrumb = ({ items }: BreadcrumbProps) => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm border-b border-gray-700/50 py-3 px-6 sm:px-12 lg:px-24 mt-20"
+      className="bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm border-b border-gray-700/50 py-3 px-6 sm:px-12 lg:px-24 mt-4"
       aria-label="Breadcrumb"
     >
       <div className="max-w-7xl mx-auto">

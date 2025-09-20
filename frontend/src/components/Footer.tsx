@@ -61,6 +61,7 @@ const Footer = () => {
             href="https://facebook.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow us on Facebook"
             className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
           >
             <LuFacebook size={24} />
@@ -69,6 +70,7 @@ const Footer = () => {
             href="https://twitter.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Follow us on Twitter"
             className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
           >
             <LuTwitter size={24} />
@@ -77,6 +79,7 @@ const Footer = () => {
             href="https://linkedin.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Connect with us on LinkedIn"
             className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
           >
             <LuLinkedin size={24} />
@@ -85,6 +88,7 @@ const Footer = () => {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="View our projects on GitHub"
             className="text-gray-400 hover:text-cyan-400 transition-colors duration-300 hover:scale-110"
           >
             <LuGithub size={24} />

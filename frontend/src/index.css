@@ -190,3 +190,171 @@ html, body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
+/* Custom Scrollbar for Search Dropdown */
+.search-dropdown-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #06b6d4 transparent;
+}
+
+.search-dropdown-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-dropdown-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-dropdown-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #0891b2);
+  border-radius: 3px;
+}
+
+.search-dropdown-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #0e7490);
+}
+
+/* Search Results Container */
+.search-results-container {
+  overscroll-behavior: contain;
+  max-height: 100%;
+  touch-action: pan-y;
+  overflow-y: auto;
+}
+
+.search-results-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-results-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #0891b2);
+  border-radius: 3px;
+}
+
+.search-results-container::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #0e7490);
+}
+
+.search-results-mobile {
+  max-height: 450px;
+  overflow-y: auto;
+  /* Webkit scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: #06b6d4 rgba(6, 182, 212, 0.3);
+}
+
+.search-results-mobile::-webkit-scrollbar {
+  width: 8px;
+  display: block;
+  -webkit-appearance: none;
+}
+
+.search-results-mobile::-webkit-scrollbar-track {
+  background: rgba(6, 182, 212, 0.2);
+  border-radius: 4px;
+}
+
+.search-results-mobile::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #0891b2);
+  border-radius: 4px;
+  -webkit-appearance: none;
+  min-height: 20px;
+}
+
+.search-results-mobile::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #0e7490);
+}
+
+.search-results-desktop {
+  max-height: 300px;
+  /* Ensure scrollbar is visible on desktop */
+  scrollbar-width: thin;
+  scrollbar-color: #06b6d4 transparent;
+}
+
+.search-results-desktop::-webkit-scrollbar {
+  width: 6px;
+  display: block;
+}
+
+.search-results-desktop::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-results-desktop::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #0891b2);
+  border-radius: 3px;
+}
+
+.search-results-desktop::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #0e7490);
+}
+
+@media (min-width: 640px) {
+  .search-results-desktop {
+    max-height: 350px;
+  }
+}
+
+@media (min-width: 768px) {
+  .search-results-desktop {
+    max-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .search-results-desktop {
+    max-height: 450px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .search-results-desktop {
+    max-height: 500px;
+  }
+}
+
+/* Force scrollbar visibility on mobile devices */
+@media (max-width: 767px) {
+  .search-results-mobile {
+    overflow-y: auto;
+  }
+  
+  .search-results-mobile::-webkit-scrollbar {
+    width: 8px;
+    display: block;
+    -webkit-appearance: none;
+  }
+  
+  .search-results-mobile::-webkit-scrollbar-track {
+    background: rgba(6, 182, 212, 0.2);
+    border-radius: 4px;
+  }
+  
+  .search-results-mobile::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #06b6d4, #0891b2);
+    border-radius: 4px;
+    min-height: 20px;
+  }
+}
+
+/* For touch devices, ensure scrollbar is always visible */
+@media (hover: none) and (pointer: coarse) {
+  .search-results-mobile {
+    overflow-y: auto;
+  }
+  
+  .search-results-mobile::-webkit-scrollbar {
+    width: 8px;
+    display: block;
+  }
+  
+  .search-results-mobile::-webkit-scrollbar-thumb {
+    background: #06b6d4;
+    border-radius: 4px;
+  }
+}
