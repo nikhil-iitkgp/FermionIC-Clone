@@ -8,14 +8,17 @@ const path = require("path");
 // Initialize Express
 const app = express();
 
-// ✅ Middleware
+// Middleware
 app.use(express.json()); // Parse JSON requests
 app.use(express.urlencoded({ extended: true })); // Parse form data
 
-// ✅ CORS Setup
+// CORS Setup
 const allowedOrigins = [
   process.env.CLIENT_URL, 
-  "http://localhost:5173"
+  "http://localhost:5173",
+  "https://siktasys.in",
+  "https://www.siktasys.in",
+  "https://fermionic-clone-1.onrender.com" // Keep old frontend during transition
 ];
 
 app.use(
