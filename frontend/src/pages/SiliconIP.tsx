@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Breadcrumb from "../components/Breadcrumb";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import { Cpu, Zap, Radio, Shield, Brain, Activity } from "lucide-react";
 
@@ -73,13 +74,14 @@ const SiliconIP = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden">
       <Header />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInVariants}
-        className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12 text-center mt-20"
+        className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12 text-center"
       >
         <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 mb-6 leading-relaxed pb-2">
           Silicon IP's

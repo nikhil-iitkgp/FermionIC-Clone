@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Breadcrumb from "../components/Breadcrumb";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Card,
@@ -73,8 +74,9 @@ const Careers = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden">
       <Header />
+      <Breadcrumb />
       
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12 mt-20">
+      <div className="w-full max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -86,7 +88,7 @@ const Careers = () => {
             Transform Your Future, We Are Hiring <Rocket className="inline-block ml-2 text-cyan-400" size={48} />
           </h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            At <span className="text-cyan-400 font-semibold">Fermionic</span>, we're continuously looking for smart and passionate engineers ready to drive and contribute to our product roadmap.
+            At <span className="text-cyan-400 font-semibold">SiktaSys</span>, we're continuously looking for smart and passionate engineers ready to drive and contribute to our product roadmap.
           </p>
         </motion.div>
 
@@ -118,7 +120,7 @@ const Careers = () => {
               <p className="text-lg font-medium">
                 Contact us at{" "}
                 <span className="font-semibold text-green-400">
-                  careers[at]fermionic[dot]design
+                  careers@siktasys.com
                 </span>
               </p>
             </div>

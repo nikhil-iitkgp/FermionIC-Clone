@@ -9,6 +9,7 @@ import { Textarea } from "../components/ui/textarea";
 import { Label } from "../components/ui/label";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -95,13 +96,14 @@ const Contact = () => {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden overflow-y-auto">
       <Header />
+      <Breadcrumb />
 
       {/* Hero Section */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto px-6 py-12 text-center mt-20"
+        className="max-w-7xl mx-auto px-6 py-12 text-center"
       >
         <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 mb-6 leading-relaxed pb-2">
           Get in Touch with Us

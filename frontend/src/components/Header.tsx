@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Button } from "./ui/button";
+import SearchModal from "./SearchModal";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   return (
     <header className="bg-black/95 backdrop-blur-md text-white py-4 px-6 shadow-lg fixed top-0 left-0 right-0 w-full z-50 border-b border-cyan-400/20">
@@ -18,23 +20,41 @@ const Header = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          {["Home", "Products", "Silicon IP", "About Us", "Careers", "Contact Us"].map(
-            (item) => (
-              <Link
-                key={item}
-                to={`/${item.toLowerCase().replace(/\s/g, "-")}`}
-                className="relative group text-lg"
-              >
-                <span className="btn-nav font-rajdhani font-medium">{item}</span>
-                <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            )
-          )}
-        </nav>
+        <div className="hidden md:flex items-center space-x-6">
+          <nav className="flex space-x-6">
+            {["Home", "Products", "Silicon IP", "About Us", "Careers", "Contact Us"].map(
+              (item) => (
+                <Link
+                  key={item}
+                  to={`/${item.toLowerCase().replace(/\s/g, "-")}`}
+                  className="relative group text-lg"
+                >
+                  <span className="btn-nav font-rajdhani font-medium">{item}</span>
+                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              )
+            )}
+          </nav>
+          
+          {/* Search Button */}
+          <Button
+            onClick={() => setIsSearchOpen(true)}
+            className="p-2 bg-gradient-to-r from-gray-700/50 to-gray-600/50 hover:from-cyan-600/20 hover:to-blue-600/20 border border-gray-600/50 hover:border-cyan-400/50 transition-all duration-300"
+            aria-label="Search"
+          >
+            <Search size={20} className="text-gray-300 hover:text-cyan-400" />
+          </Button>
+        </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center space-x-2">
+          <Button
+            onClick={() => setIsSearchOpen(true)}
+            className="p-2 bg-gradient-to-r from-gray-700/50 to-gray-600/50 hover:from-cyan-600/20 hover:to-blue-600/20 border border-gray-600/50 hover:border-cyan-400/50 transition-all duration-300"
+            aria-label="Search"
+          >
+            <Search size={20} className="text-gray-300" />
+          </Button>
           <button onClick={() => setIsOpen(!isOpen)} className="text-white text-2xl">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -89,6 +109,12 @@ const Header = () => {
           </>
         )}
       </AnimatePresence>
+      
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </header>
   );
 };
