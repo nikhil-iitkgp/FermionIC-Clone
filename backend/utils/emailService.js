@@ -2,7 +2,7 @@ const https = require('https');
 
 // Production-ready email service configuration
 const isProduction = process.env.NODE_ENV === 'production';
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'nikhilrajiitkgp@gmail.com';
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || 'mriganksh@gmail.com';
 const COMPANY_NAME = process.env.COMPANY_NAME || 'SiktaSys';
 
 console.log('📧 Email Service Initialized:', {
