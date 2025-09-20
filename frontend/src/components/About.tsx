@@ -33,14 +33,6 @@ interface Leader {
 
 const leadershipTeam: Leader[] = [
   {
-    name: "Dr. Mrigank Sharad",
-    title: "Director",
-    image: MrigankSharad,
-    linkedin: "https://www.linkedin.com/in/mrigank-sharad-b2835b7/?originalSubdomain=in",
-    description:
-      "BTech IIT Kharagpur, PhD Purdue. Asst. Professor, IIT Kharagpur. Expertise: Analog Mixed Signal IC Design, Edge Computing ICs, AI Accelerator, Neuromorphic Computing, SERDES, Signal Processing",
-  },
-  {
     name: "Dr. Pradip Mondal",
     title: "Director",
     image: DrPradipMondal,
@@ -55,6 +47,14 @@ const leadershipTeam: Leader[] = [
     linkedin: "https://www.linkedin.com/in/dr-amit-dutta-41523562/?originalSubdomain=in",
     description:
       "PhD, IISC Bangalore. Assoc. Professor, IIT Kharagpur Ex NoC, Broadcom, Texas Instruments. Expertise: SoC Architect, IP Design, Wireless Communication, Modem Algorithm and Architecture",
+  },
+  {
+    name: "Dr. Mrigank Sharad",
+    title: "Director",
+    image: MrigankSharad,
+    linkedin: "https://www.linkedin.com/in/mrigank-sharad-b2835b7/?originalSubdomain=in",
+    description:
+      "BTech IIT Kharagpur, PhD Purdue. Asst. Professor, IIT Kharagpur. Expertise: Analog Mixed Signal IC Design, Edge Computing ICs, AI Accelerator, Neuromorphic Computing, SERDES, Signal Processing",
   },
   {
     name: "Narayan Prasad",
