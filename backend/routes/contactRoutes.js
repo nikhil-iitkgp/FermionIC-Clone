@@ -51,4 +51,47 @@ router.post("/", async (req, res) => {
   }
 });
 
+// @route  POST /api/contact/test-email
+// @desc   Test email configuration
+router.post("/test-email", async (req, res) => {
+  console.log('🧪 EMAIL TEST ROUTE HIT!');
+  
+  try {
+    const testContactData = {
+      firstName: 'Test',
+      lastName: 'User',
+      email: 'test@example.com',
+      phone: '+1234567890',
+      address: 'Test Address',
+      message: 'This is a test email to verify email service configuration.'
+    };
+    
+    console.log('🧪 Sending test email...');
+    const result = await sendContactNotification(testContactData);
+    
+    if (result.success) {
+      console.log('✅ Test email sent successfully');
+      res.status(200).json({ 
+        success: true, 
+        message: 'Test email sent successfully!',
+        messageId: result.messageId 
+      });
+    } else {
+      console.log('❌ Test email failed');
+      res.status(500).json({ 
+        success: false, 
+        message: 'Test email failed',
+        error: result.error 
+      });
+    }
+  } catch (error) {
+    console.error('🧪 Test email error:', error);
+    res.status(500).json({ 
+      success: false, 
+      message: 'Test email error',
+      error: error.message 
+    });
+  }
+});
+
 module.exports = router;

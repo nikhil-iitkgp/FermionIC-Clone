@@ -1,19 +1,57 @@
 const nodemailer = require('nodemailer');
 
-// Create transporter for Gmail
+// Check if we're in a deployment environment
+const isDeployment = process.env.NODE_ENV === 'production' || process.env.RENDER;
+
+// Create transporter for Gmail with enhanced configuration
 const createTransporter = () => {
   return nodemailer.createTransport({
     service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
       user: process.env.EMAIL_USER, // Your Gmail address
       pass: process.env.EMAIL_PASS, // Your Gmail app password
     },
+    tls: {
+      rejectUnauthorized: false
+    },
+    connectionTimeout: 60000, // 60 seconds
+    greetingTimeout: 30000, // 30 seconds
+    socketTimeout: 60000, // 60 seconds
+  });
+};
+
+// Alternative transporter with different configuration for deployment environments
+const createAlternativeTransporter = () => {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+    tls: {
+      rejectUnauthorized: false
+    },
+    connectionTimeout: 30000, // 30 seconds
+    greetingTimeout: 15000, // 15 seconds
+    socketTimeout: 30000, // 30 seconds
   });
 };
 
 // Send notification email when contact form is submitted
 const sendContactNotification = async (contactData) => {
   console.log('📧 Starting email notification process...');
+  console.log('📧 Environment info:', {
+    isDeployment,
+    nodeEnv: process.env.NODE_ENV,
+    hasRender: !!process.env.RENDER,
+    hasEmailUser: !!process.env.EMAIL_USER,
+    hasEmailPass: !!process.env.EMAIL_PASS
+  });
   console.log('📧 Contact data received:', {
     name: `${contactData.firstName} ${contactData.lastName}`,
     email: contactData.email,
@@ -29,6 +67,16 @@ const sendContactNotification = async (contactData) => {
     
     console.log('📧 Email credentials found - creating transporter...');
     const transporter = createTransporter();
+    
+    // Verify SMTP connection
+    console.log('📧 Verifying SMTP connection...');
+    try {
+      await transporter.verify();
+      console.log('✅ SMTP connection verified successfully');
+    } catch (verifyError) {
+      console.error('❌ SMTP connection verification failed:', verifyError.message);
+      // Continue anyway, as some deployments may have firewall issues with verify
+    }
     
     console.log('📧 Preparing email options...');
     const mailOptions = {
@@ -96,7 +144,17 @@ const sendContactNotification = async (contactData) => {
     });
     
     console.log('📧 Attempting to send email...');
-    const result = await transporter.sendMail(mailOptions);
+    let result;
+    try {
+      result = await transporter.sendMail(mailOptions);
+    } catch (sendError) {
+      console.log('⚠️ Primary transporter failed, trying alternative configuration...');
+      console.log('⚠️ Primary error:', sendError.message);
+      
+      const altTransporter = createAlternativeTransporter();
+      result = await altTransporter.sendMail(mailOptions);
+      console.log('✅ Alternative transporter succeeded!');
+    }
     
     console.log('✅ SUCCESS: Contact notification email sent successfully!');
     console.log('✅ Email details:', {
@@ -118,10 +176,18 @@ const sendContactNotification = async (contactData) => {
       timestamp: new Date().toISOString()
     });
     
-    // Log specific Gmail authentication errors
+    // Log specific error types
     if (error.code === 'EAUTH') {
       console.error('❌ AUTHENTICATION ERROR: Check your Gmail credentials in .env file');
       console.error('❌ Make sure you are using Gmail App Password, not regular password');
+    } else if (error.code === 'ETIMEDOUT' || error.code === 'ECONNECTION') {
+      console.error('❌ CONNECTION TIMEOUT: SMTP server connection failed');
+      console.error('❌ This may be due to firewall restrictions in deployment environment');
+      console.error('❌ Consider using alternative email service or checking network settings');
+    } else if (error.code === 'ENOTFOUND') {
+      console.error('❌ DNS ERROR: Cannot resolve SMTP server hostname');
+    } else if (error.code === 'ECONNREFUSED') {
+      console.error('❌ CONNECTION REFUSED: SMTP server rejected connection');
     }
     
     return { success: false, error: error.message };
