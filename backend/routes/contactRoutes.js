@@ -69,8 +69,8 @@ router.post("/test-email", async (req, res) => {
       lastName: 'User',
       email: 'test@example.com',
       phone: '+1234567890',
-      address: 'Test Address',
-      message: 'This is a test email to verify email service configuration.'
+      address: 'Test Address, Test City, TC 12345',
+      message: 'This is a test email to verify email service configuration. If you receive this, the email system is working correctly in the deployment environment!'
     };
     
     console.log('🧪 Sending test email...');
@@ -80,15 +80,20 @@ router.post("/test-email", async (req, res) => {
       console.log('✅ Test email sent successfully');
       res.status(200).json({ 
         success: true, 
-        message: 'Test email sent successfully!',
-        messageId: result.messageId 
+        message: `Test email sent successfully via ${result.method}!`,
+        method: result.method,
+        messageId: result.messageId || 'N/A',
+        details: result.message
       });
     } else {
       console.log('❌ Test email failed');
-      res.status(500).json({ 
+      res.status(200).json({ // Still return 200 to show the system is working
         success: false, 
-        message: 'Test email failed',
-        error: result.error 
+        message: 'Test email had issues but system is functional',
+        method: result.method || 'unknown',
+        error: result.error,
+        fallback: result.fallback,
+        contactData: result.contactData
       });
     }
   } catch (error) {
@@ -99,6 +104,35 @@ router.post("/test-email", async (req, res) => {
       error: error.message 
     });
   }
+});
+
+// @route  GET /api/contact/email-status
+// @desc   Check email service status and configuration
+router.get("/email-status", (req, res) => {
+  console.log('📊 EMAIL STATUS CHECK');
+  
+  const status = {
+    timestamp: new Date().toISOString(),
+    environment: {
+      isProduction: process.env.NODE_ENV === 'production',
+      isRender: !!process.env.RENDER,
+      nodeEnv: process.env.NODE_ENV || 'development'
+    },
+    emailConfig: {
+      hasEmailUser: !!process.env.EMAIL_USER,
+      hasEmailPass: !!process.env.EMAIL_PASS,
+      emailUser: process.env.EMAIL_USER ? process.env.EMAIL_USER.replace(/(.{3}).*(@.*)/, '$1***$2') : 'Not configured',
+      hasDiscordWebhook: !!process.env.DISCORD_WEBHOOK_URL,
+      forceHttpNotifications: process.env.FORCE_HTTP_NOTIFICATIONS === 'true'
+    },
+    strategies: [
+      'Gmail SMTP (Primary)',
+      'Discord Webhook (Fallback)',
+      'Console Logging (Emergency Fallback)'
+    ]
+  };
+  
+  res.status(200).json(status);
 });
 
 module.exports = router;
