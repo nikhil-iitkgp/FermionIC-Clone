@@ -203,8 +203,8 @@ const sendFormspreeNotification = async (contactData) => {
     try {
       console.log('📧 Attempting Formspree webhook...');
       
-      // Formspree form endpoint - sends directly to nikhilrajiitkgp@gmail.com
-      const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT || 'https://formspree.io/f/nikhilrajiitkgp@gmail.com';
+      // Formspree form endpoint - your actual Formspree form
+      const formspreeEndpoint = process.env.FORMSPREE_ENDPOINT || 'https://formspree.io/f/xnnbebwk';
       
       const formData = JSON.stringify({
         name: `${contactData.firstName} ${contactData.lastName}`,
