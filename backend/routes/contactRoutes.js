@@ -34,8 +34,8 @@ router.post("/", async (req, res) => {
     sendContactNotification(contactData)
       .then(result => {
         if (result.success) {
-          if (result.method === 'http_fallback') {
-            console.log('📧 HTTP notification sent successfully (SMTP blocked)');
+          if (result.method === 'http_fallback' || result.method === 'http_direct') {
+            console.log('📧 HTTP notification sent successfully (SMTP bypassed/blocked)');
           } else {
             console.log('📧 Email notification sent successfully:', result.messageId);
           }

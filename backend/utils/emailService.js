@@ -44,6 +44,16 @@ const sendHttpNotification = async (contactData) => {
 
 // Create transporter for Gmail with enhanced configuration
 const createTransporter = () => {
+  const timeouts = isDeployment ? {
+    connectionTimeout: 5000, // 5 seconds for deployment
+    greetingTimeout: 3000, // 3 seconds for deployment
+    socketTimeout: 5000, // 5 seconds for deployment
+  } : {
+    connectionTimeout: 60000, // 60 seconds for local
+    greetingTimeout: 30000, // 30 seconds for local
+    socketTimeout: 60000, // 60 seconds for local
+  };
+
   return nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
@@ -56,9 +66,7 @@ const createTransporter = () => {
     tls: {
       rejectUnauthorized: false
     },
-    connectionTimeout: 60000, // 60 seconds
-    greetingTimeout: 30000, // 30 seconds
-    socketTimeout: 60000, // 60 seconds
+    ...timeouts
   });
 };
 
@@ -128,17 +136,42 @@ const sendContactNotification = async (contactData) => {
       return { success: false, error: 'Email credentials not configured' };
     }
     
+    // In deployment environments, skip SMTP entirely and use HTTP fallback
+    if (isDeployment && (process.env.SKIP_SMTP === 'true' || process.env.RENDER)) {
+      console.log('📧 Deployment environment detected - using HTTP notification directly');
+      const httpResult = await sendHttpNotification(contactData);
+      
+      if (httpResult.success) {
+        console.log('✅ HTTP notification sent successfully (SMTP bypassed)');
+        return { 
+          success: true, 
+          method: 'http_direct',
+          message: 'Contact notification sent via HTTP logging system (SMTP bypassed)',
+          data: httpResult.data
+        };
+      } else {
+        return { 
+          success: false, 
+          error: 'HTTP notification failed',
+          fallback: true
+        };
+      }
+    }
+    
     console.log('📧 Email credentials found - creating transporter...');
     const transporter = createTransporter();
     
-    // Verify SMTP connection
-    console.log('📧 Verifying SMTP connection...');
-    try {
-      await transporter.verify();
-      console.log('✅ SMTP connection verified successfully');
-    } catch (verifyError) {
-      console.error('❌ SMTP connection verification failed:', verifyError.message);
-      // Continue anyway, as some deployments may have firewall issues with verify
+    // Skip SMTP verification in deployment environments as it often hangs
+    if (!isDeployment) {
+      console.log('📧 Verifying SMTP connection...');
+      try {
+        await transporter.verify();
+        console.log('✅ SMTP connection verified successfully');
+      } catch (verifyError) {
+        console.error('❌ SMTP connection verification failed:', verifyError.message);
+      }
+    } else {
+      console.log('📧 Skipping SMTP verification in deployment environment');
     }
     
     console.log('📧 Preparing email options...');
