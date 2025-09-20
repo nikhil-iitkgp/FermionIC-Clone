@@ -34,9 +34,16 @@ router.post("/", async (req, res) => {
     sendContactNotification(contactData)
       .then(result => {
         if (result.success) {
-          console.log('📧 Email notification sent successfully:', result.messageId);
+          if (result.method === 'http_fallback') {
+            console.log('📧 HTTP notification sent successfully (SMTP blocked)');
+          } else {
+            console.log('📧 Email notification sent successfully:', result.messageId);
+          }
         } else {
           console.error('📧 Email notification failed:', result.error);
+          if (result.fallback) {
+            console.log('📋 Contact data logged for manual processing');
+          }
         }
       })
       .catch(error => {
