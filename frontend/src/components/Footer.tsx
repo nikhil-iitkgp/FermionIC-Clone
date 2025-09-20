@@ -5,8 +5,8 @@ import { LuFacebook, LuTwitter, LuLinkedin, LuGithub } from "react-icons/lu";
 const Footer = () => {
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       className="bg-black/95 backdrop-blur-md text-white py-8 px-6 w-full max-w-[100vw] overflow-hidden border-t border-cyan-400/20"
     >

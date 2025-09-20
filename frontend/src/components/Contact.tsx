@@ -44,7 +44,23 @@ const Contact = () => {
 
       if (!response.ok) throw new Error("Failed to send message");
 
-      toast.success("Message sent successfully! 🎉"); 
+      toast.success("Message sent successfully! 🎉", {
+        style: {
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          color: 'white',
+          fontWeight: '600',
+          border: '1px solid #059669',
+          borderRadius: '12px',
+          padding: '16px 20px',
+          fontSize: '16px',
+          boxShadow: '0 10px 25px rgba(16, 185, 129, 0.3)',
+        },
+        iconTheme: {
+          primary: '#ffffff',
+          secondary: '#10b981',
+        },
+        duration: 4000,
+      }); 
       setFormData({
         firstName: "",
         lastName: "",
@@ -54,68 +70,108 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
-      toast.error("Error sending message. Please try again. ❌"); 
+      toast.error("Error sending message. Please try again. ❌", {
+        style: {
+          background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+          color: 'white',
+          fontWeight: '600',
+          border: '1px solid #dc2626',
+          borderRadius: '12px',
+          padding: '16px 20px',
+          fontSize: '16px',
+          boxShadow: '0 10px 25px rgba(239, 68, 68, 0.3)',
+        },
+        iconTheme: {
+          primary: '#ffffff',
+          secondary: '#ef4444',
+        },
+        duration: 4000,
+      }); 
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="w-screen min-h-screen flex flex-col bg-gray-900 text-white">
+    <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden overflow-y-auto">
       <Header />
 
-      <motion.main
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="flex-1 flex flex-col items-center px-6 sm:px-12 lg:px-24 py-24"
+      {/* Hero Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto px-6 py-12 text-center mt-20"
       >
-        {/* Page Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="max-w-4xl text-center"
-        >
-          <h1 className="text-5xl font-extrabold text-white leading-tight">
-            Get in Touch with Us
-          </h1>
-          <p className="text-lg text-gray-300 mt-4">
-            Leave your message, and we'll get back to you as soon as possible.
-          </p>
-        </motion.div>
+        <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 mb-6 leading-relaxed pb-2">
+          Get in Touch with Us
+        </h1>
+        <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
+          Leave your message, and we'll get back to you as soon as possible. We're here to help with your <span className="text-cyan-400 font-semibold">semiconductor solutions</span>.
+        </p>
+      </motion.div>
+
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex-1 flex flex-col items-center px-6 sm:px-12 lg:px-24 pb-32"
+      >
 
         {/* Office Locations */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 w-full max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl overflow-hidden">
           {[
             {
               title: "Main Office",
-              address: `FermionIC Design Pvt Ltd
-                GVR Vision, 268, 3rd Floor, AECS Layout - A Block, Marathahalli,
-                Bengaluru, Karnataka 560037, India`,
+              address: `Siktasys Pvt Ltd. 3A Block-20,New Joth Shibrampur Road,
+Thakurpukur Mahestola, Kolkata,
+West Bengal , 700141`,
               iconColor: "text-blue-400",
+              gradient: "from-blue-500 to-cyan-500",
+              bgGradient: "from-blue-500/10 to-cyan-500/10",
             },
             {
-              title: "Sales Office",
-              address: `FermionIC Design Pvt Ltd
-                Inspire Workplace, 134-135, Service Rd, LRDE Layout,
-                Doddanekkundi, Bangalore, Karnataka 560037, India`,
+              title: "R&D Lab",
+              address: `R&D Lab: AVLSI Lab, IIT Kharagpur, Kharagpur, West Bengal,
+721302`,
               iconColor: "text-green-400",
+              gradient: "from-green-500 to-emerald-500",
+              bgGradient: "from-green-500/10 to-emerald-500/10",
             },
           ].map((office, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: index === 0 ? -20 : 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+              whileHover={{ 
+                scale: 1.02,
+                transition: { duration: 0.3 }
+              }}
+              className="h-full"
             >
-              <Card className="bg-gray-800 p-6 rounded-lg shadow-md border border-gray-700">
-                <h3 className="text-2xl font-semibold flex items-center gap-2 text-white">
-                  <MapPin className={office.iconColor} /> {office.title}
-                </h3>
-                <p className="mt-3 text-gray-300 whitespace-pre-line">
-                  {office.address}
-                </p>
+              <Card className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700/50 shadow-2xl rounded-xl p-8 h-full flex flex-col relative overflow-hidden group hover:border-gray-600/70 transition-all duration-300 max-w-full">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${office.bgGradient}`}></div>
+                </div>
+                
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className={`w-12 h-12 rounded-full bg-gradient-to-r ${office.gradient} flex items-center justify-center`}>
+                      <MapPin className="text-white" size={24} />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white">
+                      {office.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-300 whitespace-pre-line flex-grow leading-relaxed text-lg">
+                    {office.address}
+                  </p>
+                </div>
+                
+                {/* Hover Effect Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${office.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl`}></div>
               </Card>
             </motion.div>
           ))}
@@ -123,16 +179,29 @@ const Contact = () => {
 
         {/* Contact Form */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4 }}
-          className="bg-gray-800 mt-16 p-8 shadow-lg rounded-lg border border-gray-700 w-full max-w-4xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+          className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700/50 shadow-2xl rounded-xl p-8 w-full max-w-4xl relative overflow-hidden group mt-16"
         >
-          <h2 className="text-3xl font-semibold text-center mb-6">
-            Send Us a Message
-          </h2>
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10"></div>
+          </div>
+          
+          <div className="relative z-10">
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mr-3">
+                  <Send className="text-white" size={24} />
+                </div>
+                <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
+                  Send Us a Message
+                </h2>
+              </div>
+            </div>
 
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-8" onSubmit={handleSubmit}>
             {/* First & Last Name */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -179,18 +248,22 @@ const Contact = () => {
               <Textarea id="message" name="message" value={formData.message} onChange={handleChange} rows={4} required />
             </div>
 
-            {/* Submit Button (Styled like Product Page) */}
-            <div className="text-center">
+            {/* Submit Button */}
+            <div className="text-center pt-4">
               <Button
                 type="submit"
-                className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105 hover:from-blue-600 hover:to-blue-800 flex items-center gap-2"
-                disabled={isSubmitting} // ✅ Disable button when submitting
+                className="bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-600 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:from-blue-600 hover:via-cyan-600 hover:to-blue-700 flex items-center gap-3 mx-auto disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                disabled={isSubmitting}
               >
-                <Send size={20} />
+                <Send size={22} />
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </div>
           </form>
+          </div>
+          
+          {/* Hover Effect Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
         </motion.div>
       </motion.main>
 

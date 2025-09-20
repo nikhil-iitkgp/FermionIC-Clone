@@ -6,10 +6,12 @@ import SiliconIp from "./pages/SiliconIP";
 import About from "./components/About";
 import Careers from "./components/Careers";
 import Contact from "./components/Contact";
-import CrystalOscillator from "./pages/products/CrystalOscillator";
-import LowNoiseLDO from "./pages/products/LowNoiseLDO";
-import RFBeamforming from "./pages/products/RFBeamforming";
-import SignalIntegrity from "./pages/products/SignalIntegrity";
+import AnalogFrontend from "./pages/products/AnalogFrontend";
+import AIAcceleratorChip from "./pages/products/AIAcceleratorChip";
+import DataConverters from "./pages/products/DataConverters";
+import PowerManagementICs from "./pages/products/PowerManagementICs";
+import CommunicationSoCs from "./pages/products/CommunicationSocs";
+import WirelineCommunicationICs from "./pages/products/WirelineCommunicationICs";
 import "./index.css";
 import "./App.css";
 
@@ -21,15 +23,23 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/analog-frontend" element={<AnalogFrontend />} />
         <Route
-          path="/products/crystal-oscillator"
-          element={<CrystalOscillator />}
+          path="/products/ai-accelerator-chip"
+          element={<AIAcceleratorChip />}
         />
-        <Route path="/products/low-noise-ldo" element={<LowNoiseLDO />} />
-        <Route path="/products/rf-beamforming" element={<RFBeamforming />} />
+        <Route path="/products/data-converters" element={<DataConverters />} />
         <Route
-          path="/products/signal-integrity"
-          element={<SignalIntegrity />}
+          path="/products/power-management-ics"
+          element={<PowerManagementICs />}
+        />
+        <Route
+          path="/products/communication-socs"
+          element={<CommunicationSoCs />}
+        />
+        <Route
+          path="/products/wireline-communication-ics"
+          element={<WirelineCommunicationICs />}
         />
         <Route path="/silicon-ip" element={<SiliconIp />} />
         <Route path="/about-us" element={<About />} />

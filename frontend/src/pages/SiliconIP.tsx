@@ -1,69 +1,77 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { Button } from "@/components/ui/button"; // Importing Button for consistency
+import { Cpu, Zap, Radio, Shield, Brain, Activity } from "lucide-react";
 
 const fadeInVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
-// Data for Silicon IP sections
+const cardVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+// Data for Silicon IP sections with icons and enhanced styling
 const siliconIPData = [
   {
-    title: "General Purpose & Special Purpose PLLs",
+    title: "SERDES for High Speed Chip to chip backplane Interconnects",
     description:
-      "Fermionic provides a configurable PLL-Core with ring or multi-gear LC VCO for SoC clocking needs. Our PLL-core has been verified in SERDES applications.",
-    features: [
-      "Fractional-N PLL core: Programmable frequency synthesizers.",
-      "Compact low-area ring PLLs.",
-      "Multi-Phase PLL cores.",
-    ],
+      "Data rate: 5 to 10 Gbps Multi Serdes Transceivers, PHY Synthesizer, Data Lane Multiplexer, Packet Processor, Trace Encoder, JESD, JTAG, USB 3.0",
+    icon: Cpu,
+    gradient: "from-blue-500 to-cyan-500",
+    bgGradient: "from-blue-500/10 to-cyan-500/10",
   },
   {
-    title: "Deliverables",
-    features: [
-      "GDSII, CDL Netlist",
-      "Verilog Model with loop dynamics",
-      "Liberty timing models (.lib)",
-      "Integration Support",
-    ],
-  },
-  {
-    title: "Fermionic SerDes PMA",
+    title: "Data Converters",
     description:
-      "Our silicon-proven SerDes supports up to PCIe Gen5 (32Gbps) with multi-protocol capabilities.",
-    features: [
-      "Supports USB4.0, PCIe Gen1/2/3/4/5, JESD204A/B/C",
-      "Integrated TX PLL",
-      "Programmable TX-FFE",
-      "PRBS Generator and Checker",
-    ],
+      "Pipeline ADC & SAR ADC, Delta Sigma ADC, Dual Slope ADC, RF - 5 to 10 Gbps Serializer/Deserializer, 100 MSPS",
+    icon: Activity,
+    gradient: "from-green-500 to-emerald-500",
+    bgGradient: "from-green-500/10 to-emerald-500/10",
   },
   {
-    title: "Analog General Purpose IPs",
-    features: [
-      "Bandgap Reference",
-      "LDO, Power-management, and supervisory control IPs",
-      "General Purpose ADC",
-      "CML Buffers for low-jitter on-chip clock distribution",
-    ],
+    title: "Power Management IPs",
+    description:
+      "100% Digital DCDC Switched Capacitor DCDC Converters, Inductive based Buck-Boost Converters, Low Dropout Regulators, 10 mA to 1A, Battery charging Interface, Output Power levels: 100mA to 1A",
+    icon: Zap,
+    gradient: "from-yellow-500 to-orange-500",
+    bgGradient: "from-yellow-500/10 to-orange-500/10",
+  },
+  {
+    title: "Radiation Hardened IPs for Space Application",
+    description:
+      "Several Radiation Hardened by Design (RHBD) IPs with SEL Tolerant Circuit Schemes",
+    icon: Shield,
+    gradient: "from-purple-500 to-violet-500",
+    bgGradient: "from-purple-500/10 to-violet-500/10",
+  },
+  {
+    title: "AI Compute Cores",
+    description:
+      "Compute cores for AI acceleration, In Memory Compute cores for Deep Neural Network and Spiking Neural Network, Multi-core architectures for CNN modules, suitable for low power edge computing applications",
+    icon: Brain,
+    gradient: "from-pink-500 to-rose-500",
+    bgGradient: "from-pink-500/10 to-rose-500/10",
+  },
+  {
+    title: "Analog Frontend",
+    description:
+      "Signal Acquisition and Signal Conditioning Units, Amplification of Low Noise Amplifier, Voltage Controlled Oscillator, Frequency Stabilization, Impedance Boosting, Offset Trimming, Filtering, Current Conveyor, Instrumentation amplifier, ultra low current sensing",
+    icon: Radio,
+    gradient: "from-indigo-500 to-blue-500",
+    bgGradient: "from-indigo-500/10 to-blue-500/10",
   },
 ];
 
 const SiliconIP = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col">
+    <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden">
       <Header />
 
       {/* Hero Section */}
@@ -71,55 +79,61 @@ const SiliconIP = () => {
         initial="hidden"
         animate="visible"
         variants={fadeInVariants}
-        className="max-w-7xl mx-auto px-6 py-12 text-center mt-20"
+        className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12 text-center mt-20"
       >
-        <h1 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-          Silicon IP Portfolio
+        <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 mb-6 leading-relaxed pb-2">
+          Silicon IP's
         </h1>
-        <p className="text-lg text-gray-400 max-w-3xl mx-auto mt-4">
-          Fermionic Design offers a wide range of <strong>PPA-optimized</strong> SERDES IPs, PLLs,
-          and Analog-Glue IPs. Our <strong>silicon-proven</strong> solutions ensure robust design flow and seamless integration.
+        <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          SiktaSys offers a wide range of <span className="text-cyan-400 font-semibold">PPA-optimized</span> SERDES IPs, Data Converters, Power Management IPs,
+          and Analog Frontend solutions. Our <span className="text-blue-400 font-semibold">silicon-proven</span> solutions ensure robust design flow and seamless integration.
         </p>
       </motion.div>
 
-      {/* Grid Layout */}
-      <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-        {siliconIPData.map((section, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.3 }}
-            className="rounded-xl overflow-hidden"
-          >
-            <Card className="bg-gray-900 text-white border border-gray-800 shadow-lg rounded-xl p-6">
-              <CardHeader>
-                <CardTitle className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r text-white">
-                  {section.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {expandedIndex === index && section.description && (
-                  <p className="text-gray-300 mb-4">{section.description}</p>
-                )}
-
-                <ul className="list-disc list-inside space-y-2 text-gray-400">
-                  {section.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                  ))}
-                </ul>
-
-                <div className="mt-6 text-center">
-                  <Button
-                    onClick={() => toggleExpand(index)}
-                    className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105 hover:from-blue-600 hover:to-blue-800"
-                  >
-                    {expandedIndex === index ? "Hide Details" : "View Details"}
-                  </Button>
+      {/* IP Categories */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {siliconIPData.map((section, index) => {
+          const IconComponent = section.icon;
+          return (
+            <motion.div
+              key={index}
+              initial="hidden"
+              animate="visible"
+              variants={cardVariants}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -10,
+                transition: { duration: 0.3 }
+              }}
+              className="rounded-xl overflow-hidden h-full"
+            >
+              <Card className={`bg-gradient-to-br ${section.bgGradient} backdrop-blur-sm border border-gray-700/50 shadow-2xl rounded-xl p-6 h-full flex flex-col relative overflow-hidden group hover:border-gray-600/70 transition-all duration-300`}>
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
                 </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+                
+                <CardHeader className="pb-4 text-center relative z-10">
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r ${section.gradient} flex items-center justify-center shadow-lg`}>
+                    <IconComponent size={32} className="text-white" />
+                  </div>
+                  <CardTitle className="text-xl font-bold text-white leading-tight min-h-[3rem] flex items-center justify-center">
+                    {section.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow relative z-10">
+                  <p className="text-gray-300 text-sm leading-relaxed">
+                    {section.description}
+                  </p>
+                </CardContent>
+                
+                {/* Hover Effect Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${section.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-xl`}></div>
+              </Card>
+            </motion.div>
+          );
+        })}
       </div>
 
       <Footer />

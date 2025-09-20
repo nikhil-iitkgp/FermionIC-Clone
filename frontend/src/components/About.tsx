@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -10,8 +9,13 @@ import {
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
-import { Button } from "@/components/ui/button";
 import { FaLinkedin } from "react-icons/fa";
+
+// Import team member images
+import DrPradipMondal from "../assets/DrPradipMondal.jpg";
+import DrAmitDatta from "../assets/DrAmitDatta.jpg";
+import MrigankSharad from "../assets/MrigankSharad.png";
+import NarayanPrasad from "../assets/NarayanPrasad.jpg";
 
 const fadeInVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -28,129 +32,133 @@ interface Leader {
 
 const leadershipTeam: Leader[] = [
   {
-    name: "Gautam Kumar Singh",
-    title: "CEO",
-    image:
-      "https://static.wixstatic.com/media/3a7a0a_8e80e06480284ca9999f71029d42844e~mv2.jpg/v1/crop/x_323,y_143,w_860,h_865/fill/w_432,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/gautam_da.jpg",
-    linkedin: "https://www.linkedin.com/in/gautamkumar",
+    name: "Dr. Mrigank Sharad",
+    title: "Director",
+    image: MrigankSharad,
+    linkedin: "https://www.linkedin.com/in/mrigank-sharad-b2835b7/?originalSubdomain=in",
     description:
-      "Gautam is an accomplished semiconductor professional with experience in IC and IP product design and business creation. He has held senior engineering positions at top semiconductor companies in India, driving product definition and business unit management for high-speed interconnect communication IPs. He holds an M.Sc (Engg) degree from IISc Bangalore and a B.Tech from IIT Varanasi. Gautam has been part of several successful semiconductor startups in India.",
+      "BTech IIT Kharagpur, PhD Purdue. Asst. Professor, IIT Kharagpur. Expertise: Analog Mixed Signal IC Design, Edge Computing ICs, AI Accelerator, Neuromorphic Computing, SERDES, Signal Processing",
   },
   {
-    name: "Prasun Bhattacharyya",
-    title: "CTO",
-    image:
-      "https://static.wixstatic.com/media/3a7a0a_c83fa5a5cb4143dcaa4cc9b7dc7d9ef3~mv2.jpg/v1/crop/x_0,y_0,w_791,h_794/fill/w_432,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/prasun_da.jpg",
-    linkedin: "https://www.linkedin.com/in/prasunbhattacharyya",
+    name: "Dr. Pradip Mondal",
+    title: "Director",
+    image: DrPradipMondal,
+    linkedin: "https://www.linkedin.com/in/pradip-mandal-36151b273/?originalSubdomain=in",
     description:
-      "With two decades of experience, Prasun has led cutting-edge designs in top semiconductor companies. He was responsible for designing and productizing industry-leading RF transceivers, high-performance PLLs, ADCs, TIAs, and SERDES. He holds a B.E. in Electronics and Communication from IIEST, Shibpur, West Bengal, and was part of one of India’s most successful semiconductor startups.",
+      "PhD EE&CS, BTech - IIEST. Ex Philips Semis, Motorola, Alliance Semiconductor, Cadence, Synopsys. Professor, IIT Kharagpur. Expertise: Analog Mixed Signal IC Design, Power Management, Analog Frontend, RFIC IC Testing, Characterization",
   },
   {
-    name: "Abhra Bagchi",
-    title: "Architect, Digital Design",
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_117c986bb70c42dab4436a7b5e5502cd~mv2.jpg/v1/fill/w_420,h_420,al_c,lg_1,q_80,enc_avif,quality_auto/Abhra1_edited.jpg",
-    linkedin: "https://www.linkedin.com/in/abhrabagchi",
+    name: "Dr. Amit Dutta",
+    title: "Director",
+    image: DrAmitDatta,
+    linkedin: "https://www.linkedin.com/in/dr-amit-dutta-41523562/?originalSubdomain=in",
     description:
-      "Abhra has a rich and diverse experience in Digital Design. He has worked with Google, Qualcomm, and Intel after graduating from IISc with an M.Tech in Electronic Design and B.Tech from IIEST, Shibpur. He has contributed to Coherent Caches for GPUs, WiFi 6/6E PHY, Memory Controllers, and High-Speed IO.",
+      "PhD, IISC Bangalore. Assoc. Professor, IIT Kharagpur Ex NoC, Broadcom, Texas Instruments. Expertise: SoC Architect, IP Design, Wireless Communication, Modem Algorithm and Architecture",
   },
   {
-    name: "Shabaaz N Syed",
-    title: "Director, Custom Layout",
-    image:
-      "https://static.wixstatic.com/media/ee7e9e_1ba6aa96e677472f900485745b407beb~mv2.jpg/v1/fill/w_433,h_433,al_c,lg_1,q_80,enc_avif,quality_auto/Shabaaz_1_circle_edited.jpg",
-    linkedin: "https://www.linkedin.com/in/shabaazsyed",
+    name: "Narayan Prasad",
+    title: "Advisor & Strategy Consultant",
+    image: NarayanPrasad,
+    linkedin: "https://www.linkedin.com/in/narayanprasad/?originalSubdomain=in",
     description:
-      "Shabaaz has extensive experience in custom layout and chip integration for complex SoCs and ICs. He previously worked with Maxlinear and Western Digital after earning his B.Tech in Electronics from SDM College of Engineering and Technology, Dharwad. His expertise includes multi-protocol SerDes, RF transceivers, and high-performance analog ICs.",
+      "Edu.: Texas A&M, BITS Pilani Ex TI, Rambus, Broadcom, Intel, Arm, Sensesemi",
   },
 ];
 
 const About = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggleExpand = (index: number) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
-  };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col">
+    <div className="w-full min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white flex flex-col overflow-x-hidden">
       <Header />
 
-      {/* Hero Section Fixes */}
+      {/* Hero Section */}
       <motion.div
         initial="hidden"
         animate="visible"
         variants={fadeInVariants}
-        className="w-full flex-grow px-4 md:px-8 lg:px-16 xl:px-24 py-4 mt-20 flex flex-col justify-center"
+        className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-12 text-center mt-20"
       >
-        <div className="w-full text-center mt-4 md:mt-4 lg:mt-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 leading-normal text-white break-words w-full">
-            About FermionIC Design
-          </h1>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto mt-4 whitespace-normal">
-            FermionIC Design is a fabless semiconductor company developing IPs and
-            chipsets for wireline and wireless communication systems. Our
-            multiprotocol SERDES IP supports up to 32Gbps NRZ data-rate, meeting
-            electrical specifications of PCIe5, USB4, Ethernet, and JESD standards.
-          </p>
-        </div>
+        <h1 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 mb-6 leading-relaxed pb-3">
+          About SiktaSys
+        </h1>
+        <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          SiktaSys is a <span className="text-cyan-400 font-semibold">fabless semiconductor company</span> developing IPs and Chipsets for Edge Computing, 
+          Wireless and Wireline Communication SoCs, <span className="text-blue-400 font-semibold">Power management unit</span> and Sensor Data 
+          Acquisition SoCs.
+        </p>
       </motion.div>
 
-      {/* Leadership Team Section */}
-      <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
-        {leadershipTeam.map((leader, index) => (
-          <motion.div
-            key={index}
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.3 }}
-            className="rounded-xl overflow-hidden"
-          >
-            <Card className="bg-gray-900 text-white border border-gray-800 shadow-lg rounded-xl p-6">
-              <CardHeader className="flex items-center space-x-4">
-                <img
-                  src={leader.image}
-                  alt={leader.name}
-                  className="w-20 h-20 rounded-full border-2 border-gray-700 object-cover"
-                />
-                <div>
-                  <CardTitle className="text-xl font-semibold">
-                    {leader.name}
-                  </CardTitle>
-                  <p className="text-gray-400 text-sm">{leader.title}</p>
+      {/* Leadership Team */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 lg:px-24 py-8">
+        <motion.h2 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-3xl md:text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 leading-relaxed pb-1"
+        >
+          Leadership Team
+        </motion.h2>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {leadershipTeam.map((leader, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 + 0.4, duration: 0.6 }}
+              whileHover={{ 
+                scale: 1.02, 
+                y: -5,
+                transition: { duration: 0.3 }
+              }}
+              className="rounded-xl overflow-hidden"
+            >
+              <Card className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm border border-gray-700/50 shadow-2xl rounded-xl p-6 h-full relative overflow-hidden group hover:border-gray-600/70 transition-all duration-300">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10"></div>
                 </div>
-              </CardHeader>
+                
+                <CardHeader className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
+                  <div className="relative">
+                    <img
+                      src={leader.image}
+                      alt={leader.name}
+                      className="w-24 h-24 rounded-full border-4 border-gradient-to-r from-blue-400 to-cyan-400 object-cover shadow-lg"
+                    />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400/20 to-cyan-400/20 group-hover:from-blue-400/30 group-hover:to-cyan-400/30 transition-all duration-300"></div>
+                  </div>
+                  <div className="text-center sm:text-left">
+                    <CardTitle className="text-2xl font-bold text-white mb-2">
+                      {leader.name}
+                    </CardTitle>
+                    <p className="text-cyan-400 font-semibold text-lg">{leader.title}</p>
+                  </div>
+                </CardHeader>
 
-              <CardContent>
-                <p className="text-gray-300 mb-4">
-                  {expandedIndex === index
-                    ? leader.description
-                    : `${leader.description.slice(0, 150)}...`}
-                </p>
+                <CardContent className="relative z-10">
+                  <p className="text-gray-300 mb-6 leading-relaxed">
+                    {leader.description}
+                  </p>
 
-                {/* Show More / Show Less Button */}
-                <div className="mt-6 text-center">
-                  <Button
-                    onClick={() => toggleExpand(index)}
-                    className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-6 py-3 text-lg font-semibold rounded-lg shadow-md transition-transform transform hover:scale-105 hover:from-blue-600 hover:to-blue-800"
+                  {/* LinkedIn Button */}
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 transform hover:scale-105 hover:text-white focus:text-white"
                   >
-                    {expandedIndex === index ? "Show Less" : "View Details"}
-                  </Button>
-                </div>
-
-                {/* LinkedIn Icon */}
-                <a
-                  href={leader.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center mt-4 text-blue-500 hover:text-blue-400 transition"
-                >
-                  <FaLinkedin size={20} className="mr-2" />
-                  Connect on LinkedIn
-                </a>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+                    <FaLinkedin size={20} className="mr-2 text-white" />
+                    <span className="text-white">Connect on LinkedIn</span>
+                  </a>
+                </CardContent>
+                
+                {/* Hover Effect Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <Footer />

@@ -34,20 +34,22 @@ app.use(
 // ✅ MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => console.log(" MongoDB Connected"))
   .catch((err) => {
-    console.error("❌ MongoDB Connection Error:", err);
+    console.error(" MongoDB Connection Error:", err);
     process.exit(1);
   });
 
-// ✅ API Routes
+// API Routes
 app.use("/api/contact", require("./routes/contactRoutes"));
+app.use("/api", require("./routes/testEmail"));
 
-// ✅ Health Check Route (For Render)
+// Health Check Route (For Render)
 app.get("/healthz", (req, res) => {
   res.status(200).send("OK");
 });
 
+// Error Handling Middleware
 // ✅ Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error("❌ Server Error:", err);
