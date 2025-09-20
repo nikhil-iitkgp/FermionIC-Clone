@@ -54,7 +54,7 @@ const AnalogFrontend = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/AnalogFrontend.png"
+              src="/images/AnalogFrontend.png"
               alt="Analog Frontend"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}

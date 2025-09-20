@@ -54,7 +54,7 @@ const WirelineCommunicationICs = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/WirelineCommunicationICs.png"
+              src="/images/WirelineCommunicationICs.png"
               alt="Wireline Communication ICs"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}

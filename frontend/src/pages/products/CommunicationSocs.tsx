@@ -54,7 +54,7 @@ const CommunicationSoCs = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/CommunicationSocs.png"
+              src="/images/CommunicationSocs.png"
               alt="Communication SoCs"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}

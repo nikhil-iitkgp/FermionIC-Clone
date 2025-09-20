@@ -54,7 +54,7 @@ const DataConverters = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/DataConverters.png"
+              src="/images/DataConverters.png"
               alt="Data Converters"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}

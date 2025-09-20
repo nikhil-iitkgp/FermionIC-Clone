@@ -54,7 +54,7 @@ const AIAcceleratorChip = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/AiAcceleratorChipForEdgeComputing.png"
+              src="/images/AiAcceleratorChipForEdgeComputing.png"
               alt="AI Accelerator Chip for Edge Computing"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}

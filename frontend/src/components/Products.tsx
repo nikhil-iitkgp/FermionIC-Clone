@@ -12,7 +12,7 @@ const products = [
     title: "Communication SoC",
     description:
       "Multi-mode communication SoC for IoT applications - with RFiC, Baseband and Microprocessor.",
-    image: "/src/assets/CommunicationSocs.png",
+    image: "/images/CommunicationSocs.png",
     link: "/products/communication-socs",
   },
   {
@@ -20,7 +20,7 @@ const products = [
     title: "Power Management ICs",
     description:
       "Battery charging interface, Energy Harvesting, Power converters, LDO.",
-    image: "/src/assets/PowerManagementICs.png",
+    image: "/images/PowerManagementICs.png",
     link: "/products/power-management-ics",
   },
   {
@@ -28,7 +28,7 @@ const products = [
     title: "Analog Frontend",
     description:
       "Analog frontend for sensor data acquisition in IoT devices.",
-    image: "/src/assets/AnalogFrontend.png",
+    image: "/images/AnalogFrontend.png",
     link: "/products/analog-frontend",
   },
   {
@@ -36,7 +36,7 @@ const products = [
     title: "Wireline Communication ICs",
     description:
       "SERDES, CDR, Clock Synthesizer, Multi-Standard Transceivers, Equalizer, Encoder Decoders, BIST.",
-    image: "/src/assets/WirelineCommunicationICs.png",
+    image: "/images/WirelineCommunicationICs.png",
     link: "/products/wireline-communication-ics",
   },
   {
@@ -44,7 +44,7 @@ const products = [
     title: "AI Accelerator Chip for Edge Computing",
     description:
       "In-memory computing accelerator for low power edge computing.",
-    image: "/src/assets/AiAcceleratorChipForEdgeComputing.png",
+    image: "/images/AiAcceleratorChipForEdgeComputing.png",
     link: "/products/ai-accelerator-chip",
   },
   {
@@ -52,7 +52,7 @@ const products = [
     title: "Data Converters",
     description:
       "Data converters with a wide range of specifications and architectures for specific applications.",
-    image: "/src/assets/DataConverters.png",
+    image: "/images/DataConverters.png",
     link: "/products/data-converters",
   },
 ];

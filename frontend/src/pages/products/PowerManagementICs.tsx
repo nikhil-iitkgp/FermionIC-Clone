@@ -54,7 +54,7 @@ const PowerManagementICs = () => {
             className="relative overflow-hidden rounded-lg shadow-lg w-full max-w-2xl"
           >
             <motion.img
-              src="/src/assets/PowerManagementICs.png"
+              src="/images/PowerManagementICs.png"
               alt="Power Management ICs"
               className="w-full h-auto object-cover rounded-lg"
               initial={{ scale: 1.1 }}
