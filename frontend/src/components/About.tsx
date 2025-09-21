@@ -55,15 +55,15 @@ const leadershipTeam: Leader[] = [
     linkedin: "https://www.linkedin.com/in/mrigank-sharad-b2835b7/?originalSubdomain=in",
     description:
       "BTech IIT Kharagpur, PhD Purdue. Asst. Professor, IIT Kharagpur. Expertise: Analog Mixed Signal IC Design, Edge Computing ICs, AI Accelerator, Neuromorphic Computing, SERDES, Signal Processing",
-  },
-  {
-    name: "Narayan Prasad",
-    title: "Advisor & Strategy Consultant",
-    image: NarayanPrasad,
-    linkedin: "https://www.linkedin.com/in/narayanprasad/?originalSubdomain=in",
-    description:
-      "Edu.: Texas A&M, BITS Pilani Ex TI, Rambus, Broadcom, Intel, Arm, Sensesemi",
-  },
+  }
+  // {
+  //   name: "Narayan Prasad",
+  //   title: "Advisor & Strategy Consultant",
+  //   image: NarayanPrasad,
+  //   linkedin: "https://www.linkedin.com/in/narayanprasad/?originalSubdomain=in",
+  //   description:
+  //     "Edu.: Texas A&M, BITS Pilani Ex TI, Rambus, Broadcom, Intel, Arm, Sensesemi",
+  // },
 ];
 
 const About = () => {
