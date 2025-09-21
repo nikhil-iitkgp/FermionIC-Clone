@@ -16,7 +16,7 @@ import { FaLinkedin } from "react-icons/fa";
 import DrPradipMondal from "../assets/DrPradipMondal.jpg";
 import DrAmitDatta from "../assets/DrAmitDatta.jpg";
 import MrigankSharad from "../assets/MrigankSharad.png";
-import NarayanPrasad from "../assets/NarayanPrasad.jpg";
+// import NarayanPrasad from "../assets/NarayanPrasad.jpg";
 
 const fadeInVariants = {
   hidden: { opacity: 0, y: 20 },
